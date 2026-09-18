@@ -1,0 +1,797 @@
+/* Simple academic layout inspired by the team's previous project websites. */
+
+:root {
+  color-scheme: light;
+  --text: #363636;
+  --muted: #666666;
+  --link: #1677bc;
+  --border: #dddddd;
+  --surface: #f5f5f5;
+  --one-step: #438bbd;
+  --reference: #bfcbd3;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 24px;
+}
+
+body {
+  margin: 0;
+  color: var(--text);
+  background: #ffffff;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--link);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:focus-visible,
+button:focus-visible,
+select:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid var(--link);
+  outline-offset: 4px;
+}
+
+button,
+select {
+  font: inherit;
+  cursor: pointer;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+h1,
+h2,
+h3,
+p,
+figure {
+  margin: 0;
+}
+
+h2 {
+  margin-bottom: 24px;
+  font-size: 30px;
+  line-height: 1.25;
+  font-weight: 600;
+  text-align: center;
+}
+
+.container {
+  width: min(1000px, calc(100% - 48px));
+  margin-inline: auto;
+}
+
+.text-container {
+  max-width: 850px;
+  margin-inline: auto;
+}
+
+.section {
+  padding-block: 30px;
+}
+
+.prose {
+  text-align: justify;
+}
+
+.prose p + p {
+  margin-top: 16px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.skip-link {
+  position: fixed;
+  top: -100px;
+  left: 16px;
+  z-index: 10;
+  padding: 12px;
+  color: #ffffff;
+  background: var(--text);
+}
+
+.skip-link:focus {
+  top: 10px;
+}
+
+/* Title, author names, and publication links. */
+
+.site-header {
+  padding: 24px 16px 0;
+  text-align: center;
+}
+
+.team-button {
+  display: inline-block;
+  padding: 9px 22px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--text);
+  background: var(--surface);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.team-button:hover {
+  border-color: #aaaaaa;
+  background: #ffffff;
+  text-decoration: none;
+}
+
+.publication-header {
+  padding-top: 38px;
+  padding-bottom: 22px;
+  text-align: center;
+}
+
+.publication-header h1 {
+  margin-bottom: 22px;
+  font-size: 42px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -1px;
+}
+
+.publication-authors {
+  max-width: 950px;
+  margin-inline: auto;
+  font-size: 19px;
+  line-height: 1.7;
+}
+
+.publication-authors > span {
+  display: inline-block;
+  margin-inline: 3px;
+}
+
+.publication-authors sup {
+  font-size: 12px;
+}
+
+.publication-affiliation {
+  margin-top: 7px;
+  font-size: 18px;
+}
+
+.equal-contribution {
+  margin-top: 2px;
+  font-size: 14px;
+  font-style: italic;
+}
+
+.publication-venue {
+  margin-top: 17px;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.conference-details {
+  margin-top: 2px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.publication-links {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 19px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--text);
+  background: #ffffff;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.button:hover {
+  background: var(--surface);
+  text-decoration: none;
+}
+
+.button svg {
+  width: 18px;
+  height: 18px;
+}
+
+.button-dark {
+  border-color: var(--text);
+  color: #ffffff;
+  background: var(--text);
+}
+
+.button-dark:hover {
+  border-color: #202020;
+  background: #202020;
+}
+
+/* Figures, findings, and real-world tasks. */
+
+.paper-figure {
+  margin-block: 24px;
+}
+
+.paper-figure img {
+  width: 100%;
+}
+
+.paper-figure a img {
+  cursor: zoom-in;
+}
+
+figcaption {
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
+  text-align: center;
+}
+
+figcaption > span {
+  font-weight: 600;
+}
+
+.overview-summary {
+  max-width: 850px;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.training-figure {
+  max-width: 850px;
+  margin-inline: auto;
+}
+
+.findings-list {
+  padding-left: 24px;
+}
+
+.findings-list li + li {
+  margin-top: 15px;
+}
+
+.task-labels {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-top: 10px;
+  font-size: 14px;
+  text-align: center;
+}
+
+/* Comparison chart using Table 3 of the paper. */
+
+.results-panel {
+  max-width: 900px;
+  margin: 26px auto 0;
+  padding: 22px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+
+.results-controls {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  padding-bottom: 20px;
+}
+
+.results-controls label {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+select {
+  width: 330px;
+  padding: 9px 30px 9px 10px;
+  border: 1px solid #bbbbbb;
+  border-radius: 4px;
+  color: var(--text);
+  background: #ffffff;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.legend {
+  display: flex;
+  gap: 20px;
+  padding-bottom: 10px;
+  font-size: 12px;
+}
+
+.legend > span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legend i {
+  width: 10px;
+  height: 10px;
+}
+
+.legend-one {
+  background: var(--one-step);
+}
+
+.legend-ref {
+  background: var(--reference);
+}
+
+.chart-heading,
+.chart-row {
+  display: grid;
+  grid-template-columns: 130px 1fr 115px;
+  align-items: center;
+  gap: 20px;
+}
+
+.chart-heading {
+  padding-block: 12px;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.chart-heading > span:last-child {
+  text-align: right;
+}
+
+.chart-row {
+  padding-block: 12px;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.chart-row:last-child {
+  border-bottom: 0;
+}
+
+.chart-model {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.chart-model small {
+  display: block;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 400;
+}
+
+.chart-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-block: 3px;
+  background: repeating-linear-gradient(
+    to right,
+    transparent 0,
+    transparent calc(25% - 1px),
+    #eeeeee calc(25% - 1px),
+    #eeeeee 25%
+  );
+}
+
+.chart-bar {
+  width: var(--value);
+  min-width: 2px;
+  height: 9px;
+}
+
+.chart-bar.one {
+  background: var(--one-step);
+}
+
+.chart-bar.reference {
+  background: var(--reference);
+}
+
+.chart-value {
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.chart-value strong {
+  color: #236a9a;
+}
+
+.chart-value .slash {
+  padding-inline: 5px;
+  color: var(--muted);
+}
+
+.chart-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  margin-top: 10px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.chart-footer > span {
+  white-space: nowrap;
+}
+
+/* Inference table and BibTeX. */
+
+.table-scroll {
+  margin-top: 22px;
+  overflow-x: auto;
+}
+
+.latency-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+
+.latency-table th,
+.latency-table td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.latency-table th:first-child {
+  text-align: left;
+}
+
+.latency-table thead {
+  background: var(--surface);
+}
+
+.latency-table tbody th {
+  font-weight: 400;
+}
+
+.table-note {
+  margin-top: 14px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.citation-toolbar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+}
+
+.copy-button {
+  border-radius: 4px;
+  font-size: 13px;
+}
+
+.copy-button[hidden] {
+  display: none;
+}
+
+pre {
+  margin: 0;
+  padding: 22px;
+  overflow-x: auto;
+  background: var(--surface);
+  font-size: 13px;
+  line-height: 1.7;
+  tab-size: 2;
+}
+
+pre code {
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+}
+
+.copy-status {
+  min-height: 25px;
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+/* Team portraits and organization logos. */
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  padding-top: 10px;
+  text-align: center;
+}
+
+.team-member img {
+  width: 140px;
+  height: 140px;
+  margin: 0 auto 18px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.team-member h3 {
+  min-height: 45px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.team-member p {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.team-links {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 8px;
+  font-size: 14px;
+}
+
+.organization-logos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 55px;
+  padding-block: 40px 55px;
+}
+
+.organization-logos img {
+  width: auto;
+  height: 60px;
+}
+
+.site-footer {
+  padding: 28px 24px;
+  color: var(--muted);
+  background: #fafafa;
+  font-size: 13px;
+  text-align: center;
+}
+
+.site-footer p + p {
+  margin-top: 5px;
+}
+
+/* Smaller screens preserve the same reading order. */
+
+@media (max-width: 800px) {
+  .publication-header h1 {
+    font-size: 35px;
+  }
+
+  .publication-authors {
+    max-width: 620px;
+    font-size: 17px;
+  }
+
+  .title-break {
+    display: none;
+  }
+
+  .results-controls {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .legend {
+    padding-bottom: 0;
+  }
+
+  .organization-logos img {
+    max-width: 260px;
+    height: 45px;
+  }
+}
+
+@media (max-width: 600px) {
+  body {
+    font-size: 15px;
+  }
+
+  .container {
+    width: calc(100% - 36px);
+  }
+
+  .section {
+    padding-block: 24px;
+  }
+
+  h2 {
+    margin-bottom: 20px;
+    font-size: 26px;
+  }
+
+  .site-header {
+    padding-top: 18px;
+  }
+
+  .team-button {
+    padding: 9px 16px;
+    font-size: 13px;
+  }
+
+  .publication-header {
+    padding-top: 28px;
+    padding-bottom: 15px;
+  }
+
+  .publication-header h1 {
+    margin-bottom: 20px;
+    font-size: 29px;
+    line-height: 1.25;
+    letter-spacing: -0.5px;
+  }
+
+  .publication-authors {
+    font-size: 16px;
+  }
+
+  .publication-affiliation {
+    font-size: 16px;
+  }
+
+  .publication-venue {
+    font-size: 15px;
+  }
+
+  .conference-details,
+  .equal-contribution {
+    font-size: 12px;
+  }
+
+  .prose {
+    text-align: left;
+  }
+
+  figcaption {
+    font-size: 12px;
+    text-align: left;
+  }
+
+  .results-panel {
+    padding: 14px;
+  }
+
+  .results-controls label,
+  select {
+    width: 100%;
+  }
+
+  select {
+    font-size: 12px;
+  }
+
+  .chart-heading,
+  .chart-row {
+    grid-template-columns: 73px 1fr 85px;
+    gap: 9px;
+  }
+
+  .chart-heading {
+    font-size: 10px;
+  }
+
+  .chart-model,
+  .chart-value {
+    font-size: 11px;
+  }
+
+  .chart-model small {
+    font-size: 9px;
+  }
+
+  .chart-footer {
+    display: block;
+    font-size: 11px;
+  }
+
+  .chart-footer > span {
+    display: block;
+    margin-top: 6px;
+  }
+
+  .task-labels {
+    gap: 4px;
+    font-size: 10px;
+  }
+
+  .latency-table {
+    font-size: 13px;
+  }
+
+  .latency-table th,
+  .latency-table td {
+    padding: 9px 8px;
+  }
+
+  pre {
+    padding: 16px;
+    font-size: 11px;
+  }
+
+  .team-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px 15px;
+  }
+
+  .team-member img {
+    width: 115px;
+    height: 115px;
+  }
+
+  .team-member h3 {
+    font-size: 14px;
+  }
+
+  .team-member p {
+    font-size: 11px;
+  }
+
+  .organization-logos {
+    gap: 25px;
+    padding-block: 25px 40px;
+  }
+
+  .organization-logos img {
+    max-width: 100%;
+    height: auto;
+    max-height: 40px;
+  }
+
+  .site-footer {
+    padding-inline: 18px;
+    font-size: 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}

@@ -1,0 +1,640 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>When One Step Is Enough | CoRL 2026</title>
+    <meta
+      name="description"
+      content="When One Step Is Enough: An Empirical Study of Euler Integration in Flow-Matching Policies. Accepted at CoRL 2026. One-step VLA inference without retraining."
+    >
+    <meta
+      name="keywords"
+      content="CoRL 2026, robot learning, flow matching, vision-language-action models, VLA, Euler integration, single-step inference, robot manipulation, Araya"
+    >
+    <meta
+      name="author"
+      content="Shivakanth Sujit, Luca Nunziante, Rousslan Fernand Julien Dossa, Kai Arulkumaran"
+    >
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="canonical" href="https://onestepflow.github.io/">
+    <!-- Scholarly citation metadata: one author per tag, no unverified publication identifiers. -->
+    <meta
+      name="citation_title"
+      content="When One Step Is Enough: An Empirical Study of Euler Integration in Flow-Matching Policies"
+    >
+    <meta name="citation_author" content="Shivakanth Sujit">
+    <meta name="citation_author_institution" content="Araya Inc., Tokyo, Japan">
+    <meta name="citation_author" content="Luca Nunziante">
+    <meta name="citation_author_institution" content="Araya Inc., Tokyo, Japan">
+    <meta name="citation_author" content="Rousslan Fernand Julien Dossa">
+    <meta name="citation_author_institution" content="Araya Inc., Tokyo, Japan">
+    <meta name="citation_author" content="Kai Arulkumaran">
+    <meta name="citation_author_institution" content="Araya Inc., Tokyo, Japan">
+    <meta name="citation_publication_date" content="2026">
+    <meta name="citation_conference_title" content="10th Conference on Robot Learning (CoRL 2026)">
+    <meta name="citation_language" content="en">
+    <meta name="citation_abstract_html_url" content="https://onestepflow.github.io/">
+    <meta name="citation_pdf_url" content="https://onestepflow.github.io/assets/paper.pdf">
+    <!-- Absolute social-preview URLs are present in the original HTML for crawlers. -->
+    <meta property="og:type" content="article">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:site_name" content="When One Step Is Enough">
+    <meta property="og:url" content="https://onestepflow.github.io/">
+    <meta property="og:title" content="When One Step Is Enough | CoRL 2026">
+    <meta
+      property="og:description"
+      content="An empirical study of Euler integration in flow-matching policies. Six VLAs, four simulation benchmarks, and 4,800 real-world rollouts. Accepted at CoRL 2026."
+    >
+    <meta property="og:image" content="https://onestepflow.github.io/assets/social-preview.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:type" content="image/png">
+    <meta
+      property="og:image:alt"
+      content="When One Step Is Enough, accepted at CoRL 2026, with images of the real-world Franka robot experiments."
+    >
+    <meta property="article:section" content="Robot Learning">
+    <meta property="article:tag" content="CoRL 2026">
+    <meta property="article:author" content="https://shivakanthsujit.github.io/">
+    <meta property="article:author" content="https://lucanunz.github.io/">
+    <meta property="article:author" content="https://dosssman.github.io/">
+    <meta property="article:author" content="https://kaixhin.com/">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="When One Step Is Enough | CoRL 2026">
+    <meta
+      name="twitter:description"
+      content="One-step inference for flow-matching robot policies, without retraining or distillation. Accepted at CoRL 2026."
+    >
+    <meta name="twitter:image" content="https://onestepflow.github.io/assets/social-preview.png">
+    <meta
+      name="twitter:image:alt"
+      content="When One Step Is Enough: CoRL 2026 paper and real-world robot experiments."
+    >
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "ScholarlyArticle",
+        "@id": "https://onestepflow.github.io/#paper",
+        "url": "https://onestepflow.github.io/",
+        "mainEntityOfPage": "https://onestepflow.github.io/",
+        "name": "When One Step Is Enough: An Empirical Study of Euler Integration in Flow-Matching Policies",
+        "headline": "When One Step Is Enough: An Empirical Study of Euler Integration in Flow-Matching Policies",
+        "description": "An empirical study of one-step versus multi-step Euler integration in six flow-matching vision-language-action models across simulation and real-world robot tasks.",
+        "image": "https://onestepflow.github.io/assets/social-preview.png",
+        "inLanguage": "en",
+        "isAccessibleForFree": true,
+        "creativeWorkStatus": "Accepted at CoRL 2026",
+        "keywords": [
+          "robot learning",
+          "flow matching",
+          "vision-language-action models",
+          "Euler integration",
+          "single-step inference"
+        ],
+        "author": [
+          {
+            "@type": "Person",
+            "name": "Shivakanth Sujit",
+            "url": "https://shivakanthsujit.github.io/",
+            "affiliation": {
+              "@id": "https://onestepflow.github.io/#araya"
+            }
+          },
+          {
+            "@type": "Person",
+            "name": "Luca Nunziante",
+            "url": "https://lucanunz.github.io/",
+            "affiliation": {
+              "@id": "https://onestepflow.github.io/#araya"
+            }
+          },
+          {
+            "@type": "Person",
+            "name": "Rousslan Fernand Julien Dossa",
+            "url": "https://dosssman.github.io/",
+            "affiliation": {
+              "@id": "https://onestepflow.github.io/#araya"
+            }
+          },
+          {
+            "@type": "Person",
+            "name": "Kai Arulkumaran",
+            "url": "https://kaixhin.com/",
+            "affiliation": {
+              "@id": "https://onestepflow.github.io/#araya"
+            }
+          }
+        ],
+        "sourceOrganization": {
+          "@type": "Organization",
+          "@id": "https://onestepflow.github.io/#araya",
+          "name": "Araya Inc.",
+          "url": "https://research.araya.org/"
+        },
+        "encoding": {
+          "@type": "MediaObject",
+          "contentUrl": "https://onestepflow.github.io/assets/paper.pdf",
+          "encodingFormat": "application/pdf"
+        },
+        "subjectOf": {
+          "@type": "Event",
+          "name": "10th Conference on Robot Learning (CoRL 2026)",
+          "url": "https://2026.corl.org/",
+          "startDate": "2026-11-09",
+          "endDate": "2026-11-12",
+          "location": {
+            "@type": "Place",
+            "name": "Austin, Texas, USA",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Austin",
+              "addressRegion": "TX",
+              "addressCountry": "US"
+            }
+          },
+          "workFeatured": {
+            "@id": "https://onestepflow.github.io/#paper"
+          }
+        }
+      }
+    </script>
+  </head>
+
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <a class="team-button" href="https://research.araya.org/research/reinforcement-learning-team">
+        Araya Reinforcement Learning Team
+      </a>
+    </header>
+
+    <main id="main">
+      <section class="publication-header container" aria-labelledby="paper-title">
+        <h1 id="paper-title">
+          When One Step Is Enough:
+          <br>
+          An Empirical Study of Euler Integration
+          <br class="title-break">
+          in Flow-Matching Policies
+        </h1>
+        <div class="publication-authors">
+          <span>
+            <a href="https://shivakanthsujit.github.io/">Shivakanth Sujit</a><sup>*</sup>,
+          </span>
+          <span>
+            <a href="https://lucanunz.github.io/">Luca Nunziante</a><sup>*</sup>,
+          </span>
+          <span>
+            <a href="https://dosssman.github.io/">Rousslan Fernand Julien Dossa</a>,
+          </span>
+          <span>
+            <a href="https://kaixhin.com/">Kai Arulkumaran</a>
+          </span>
+        </div>
+        <p class="publication-affiliation">Araya Inc., Tokyo, Japan</p>
+        <p class="equal-contribution">
+          <sup>*</sup>
+          Equal contribution
+        </p>
+        <p class="publication-venue">
+          Accepted at the
+          <a href="https://2026.corl.org/">10th Conference on Robot Learning (CoRL 2026)</a>
+        </p>
+        <p class="conference-details">November 9–12, 2026 · Austin, Texas, USA</p>
+        <div class="publication-links">
+          <a class="button button-dark" href="assets/paper.pdf">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.6"
+              aria-hidden="true"
+            >
+              <path d="M14 3H5v18h14V8zM14 3v5h5M8 13h8M8 17h6">
+              </path>
+            </svg>
+            <span>Paper</span>
+          </a>
+          <a class="button button-dark" href="#citation">BibTeX</a>
+        </div>
+      </section>
+
+      <section id="overview" class="section container" aria-labelledby="overview-title">
+        <h2 id="overview-title">Project Overview</h2>
+        <p class="overview-summary">
+          For large, sufficiently trained vision-language-action models, a single Euler
+          step largely matches multi-step task success, with
+          <strong>1.6× to 4.8× faster action generation</strong>
+          across the evaluated VLAs. No retraining, distillation, or auxiliary objectives
+          are required.
+        </p>
+        <figure class="paper-figure">
+          <a
+            href="assets/overview.webp"
+            target="_blank"
+            rel="noopener"
+            aria-label="Open Figure 1 at full resolution"
+          >
+            <img
+              src="assets/overview.webp"
+              width="1604"
+              height="508"
+              alt="Paper Figure 1: one-step versus reference-step success rates across LIBERO, LIBERO+, RoboTwin, CALVIN, and real-world evaluations. Many points cluster near the equality diagonal."
+              fetchpriority="high"
+            >
+          </a>
+          <figcaption>
+            <span>FIG. 1</span>
+            One-step vs. reference-step success across the study. Points near the
+            diagonal indicate similar success rates.
+            <a href="assets/overview.webp" target="_blank" rel="noopener">View full size ↗</a>
+          </figcaption>
+        </figure>
+      </section>
+
+      <section id="abstract" class="section container text-container" aria-labelledby="abstract-title">
+        <h2 id="abstract-title">Abstract</h2>
+        <div class="prose">
+          <p>
+            Flow matching is now the dominant approach for vision-language action (VLA)
+            robot policies, thanks to its expressiveness and simple training objective.
+            However, inference for standard flow matching requires iteratively solving
+            an ODE, limiting the control frequency at deployment. The prevailing VLA
+            training recipe relies on rectified flow matching whose target are straight
+            lines between source and target samples. In general the resulting paths are
+            not straight requiring, in principle, multiple integration steps for a more
+            accurate velocity integration. We challenge this hypothesis empirically,
+            arguing that for robot action generation this needs not be the case. We show
+            that across six flow-matching VLAs, one-step action generation largely
+            matches multi-step sampling at scale: the multi-step refinement that these
+            models are typically evaluated with confers little to no consistent
+            advantage at inference. Our experiments show that this holds as long as
+            models are sufficiently trained and have enough capacity. Practically, the
+            implication is that for large VLAs, the single-step policy comes essentially
+            for free from the multi-step model, enabling low-latency deployment without
+            retraining, distillation, or auxiliary objectives.
+          </p>
+        </div>
+      </section>
+
+      <section id="results" class="section container" aria-labelledby="results-title">
+        <h2 id="results-title">Experimental Results</h2>
+        <div class="prose text-container">
+          <p>
+            We compare six publicly released VLAs, spanning 450M to 4.7B parameters, and
+            a 211M DiT baseline across four simulation benchmarks. For each model and
+            benchmark, we use the same checkpoint and matched seeds, changing only the
+            number of Euler integration steps.
+          </p>
+          <p class="results-context">
+            Across 36 simulation test cells, TOST finds
+            <strong>23 equivalent</strong>
+            , 4 favoring multi-step, 2 favoring one-step, and 7 inconclusive.
+            Equivalence uses a ±3 percentage-point margin for success rates; point
+            estimates alone do not establish equivalence.
+          </p>
+        </div>
+        <div class="results-panel">
+          <div class="results-controls">
+            <label for="benchmark">
+              Explore a benchmark
+              <select id="benchmark">
+                <option value="libero">LIBERO · Spatial, Goal, Object</option>
+                <option value="libero10">LIBERO-10 · Long horizon</option>
+                <option value="plus">LIBERO+ · Spatial, Goal, Object</option>
+                <option value="plus10">LIBERO+ 10 · Long horizon</option>
+                <option value="calvin">CALVIN · Full-chain success</option>
+                <option value="twin">RoboTwin · Clean</option>
+                <option value="twinrand">RoboTwin · Randomized</option>
+              </select>
+            </label>
+            <div class="legend">
+              <span>
+                <i class="legend-one">
+                </i>
+                1 step
+              </span>
+              <span>
+                <i class="legend-ref">
+                </i>
+                Reference steps
+              </span>
+            </div>
+          </div>
+          <div class="chart-heading">
+            <span>MODEL</span>
+            <span>SUCCESS RATE (%)</span>
+            <span>1 STEP / REF.</span>
+          </div>
+          <div id="results-chart" class="results-chart" aria-live="polite" aria-atomic="true">
+          </div>
+          <noscript>
+            <p class="noscript-message">
+              Enable JavaScript to explore benchmark comparisons, or read Table 3 in
+              the
+              <a href="assets/paper.pdf#page=6">paper</a>
+              .
+            </p>
+          </noscript>
+          <div class="chart-footer">
+            <p id="benchmark-note">SGO aggregates the Spatial, Goal, and Object suites.</p>
+            <span>Source: Table 3</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="findings" class="section container" aria-labelledby="findings-title">
+        <h2 id="findings-title">Key Findings</h2>
+        <ul class="findings-list text-container">
+          <li>
+            <strong>Step-invariance holds at scale.</strong>
+            π₀.₅ and XR-0 are equivalent within 3 pp on every simulation benchmark with
+            an available checkpoint. Smaller models show more mixed results, especially
+            on longer tasks.
+          </li>
+          <li>
+            <strong>Training maturity and VLM features matter.</strong>
+            Robot-action pretraining is not required. With useful visual-language
+            features, a randomly initialized action expert can still reach the
+            step-invariant regime.
+          </li>
+          <li>
+            <strong>Task success and behavioral diversity can differ.</strong>
+            On D3IL Avoiding, one-step inference can preserve success while narrowing
+            the range of successful strategies.
+          </li>
+        </ul>
+        <figure class="paper-figure training-figure">
+          <a
+            href="assets/training.webp"
+            target="_blank"
+            rel="noopener"
+            aria-label="Open training ablation figure at full resolution"
+          >
+            <img
+              src="assets/training.webp"
+              width="1468"
+              height="684"
+              alt="Paper Figure 5: the success-rate gap between reference-step and one-step inference over training. Multi-step gains are concentrated on LIBERO-10 and fade with training."
+              loading="lazy"
+            >
+          </a>
+          <figcaption>
+            <span>FIG. 5</span>
+            Step-count gap over training on LIBERO. Shading indicates 95% confidence
+            intervals.
+            <a href="assets/training.webp" target="_blank" rel="noopener">View full size ↗</a>
+          </figcaption>
+        </figure>
+      </section>
+
+      <section id="real-world" class="section container" aria-labelledby="real-world-title">
+        <h2 id="real-world-title">Real-World Evaluation</h2>
+        <div class="prose text-container">
+          <p>
+            We evaluate four kitchen-style tasks with a Franka Emika Panda arm using
+            paired, blinded A/B testing. The suite includes 4,800 rollouts, with 100
+            trials per task for each model and inference variant.
+          </p>
+        </div>
+        <figure class="paper-figure robot-figure">
+          <img
+            src="assets/robot-suite.webp"
+            width="1980"
+            height="375"
+            loading="lazy"
+            alt="Four images of the Franka Panda robot performing the spoon-to-drawer, open-drawer, open-oven, and close-oven tasks from Figure 2 of the paper."
+          >
+          <div class="task-labels" aria-hidden="true">
+            <span>Spoon → drawer</span>
+            <span>Open drawer</span>
+            <span>Open oven</span>
+            <span>Close oven</span>
+          </div>
+          <figcaption>Real-world Franka suite · Figure 2 from the paper</figcaption>
+        </figure>
+        <div class="prose text-container">
+          <p>
+            Multi-step inference confers no systematic advantage: pooled gaps are small
+            and run in both directions. Only 3 of 24 task–model comparisons show a
+            significant McNemar difference. The physical evaluation budget does not
+            establish equivalence within ±3 pp, and task- and model-specific exceptions
+            remain.
+          </p>
+        </div>
+      </section>
+
+      <section id="latency" class="section container text-container" aria-labelledby="latency-title">
+        <h2 id="latency-title">Inference Latency</h2>
+        <div class="prose">
+          <p>
+            A single Euler step reduces per-chunk inference latency by 1.6× to 4.8× on
+            an NVIDIA A100. Speedups depend on the relative cost of the VLM backbone and
+            action head.
+          </p>
+        </div>
+        <div class="table-scroll" tabindex="0" role="region" aria-label="Inference latency table">
+          <table class="latency-table">
+            <caption class="sr-only">VLA inference latency from Table 1 of the paper</caption>
+            <thead>
+              <tr>
+                <th scope="col">Model</th>
+                <th scope="col">Reference</th>
+                <th scope="col">1 step</th>
+                <th scope="col">Speedup</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">SmolVLA</th>
+                <td>436 ms</td>
+                <td>91 ms</td>
+                <td>
+                  <span>4.8×</span>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">X-VLA</th>
+                <td>215 ms</td>
+                <td>70 ms</td>
+                <td>
+                  <span>3.1×</span>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">FLOWER</th>
+                <td>140 ms</td>
+                <td>60 ms</td>
+                <td>
+                  <span>2.3×</span>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">π₀.₅</th>
+                <td>80 ms</td>
+                <td>50 ms</td>
+                <td>
+                  <span>1.6×</span>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">LAP</th>
+                <td>60 ms</td>
+                <td>35 ms</td>
+                <td>
+                  <span>1.7×</span>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">XR-0</th>
+                <td>170 ms</td>
+                <td>90 ms</td>
+                <td>
+                  <span>1.9×</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="table-note">
+          Source: Table 1. Speedups depend on the relative cost of the VLM backbone and
+          action head. The largest speedup is for SmolVLA, whose success rates are not
+          consistently step-equivalent.
+        </p>
+      </section>
+
+      <section id="citation" class="section container text-container" aria-labelledby="citation-title">
+        <h2 id="citation-title">Citation</h2>
+        <div class="citation-toolbar">
+          <button class="button copy-button" type="button" id="copy-citation" hidden>
+            <span>Copy BibTeX</span>
+          </button>
+        </div>
+        <pre><code id="bibtex">@inproceedings{sujit2026onestep,
+  title = {When One Step Is Enough: An Empirical Study of
+           Euler Integration in Flow-Matching Policies},
+  author = {Sujit, Shivakanth and Nunziante, Luca and
+            Dossa, Rousslan Fernand Julien and Arulkumaran, Kai},
+  booktitle = {Proceedings of the 10th Conference on Robot Learning},
+  year = {2026},
+  note = {Accepted for publication},
+  url = {https://onestepflow.github.io/}
+}</code></pre>
+        <p id="copy-status" class="copy-status" role="status" aria-live="polite">
+        </p>
+      </section>
+
+      <section id="team" class="section container" aria-labelledby="team-title">
+        <h2 id="team-title">Meet the Team</h2>
+        <div class="team-grid">
+          <article class="team-member">
+            <a href="https://shivakanthsujit.github.io/">
+              <img
+                src="assets/shivakanth.webp"
+                width="480"
+                height="480"
+                loading="lazy"
+                alt="Shivakanth Sujit"
+              >
+            </a>
+            <h3>
+              <a href="https://shivakanthsujit.github.io/">Shivakanth Sujit</a>
+            </h3>
+            <p>Equal contribution</p>
+            <div class="team-links">
+              <a href="mailto:sujit_shivakanth@araya.org">Email</a>
+              <a href="https://scholar.google.com/citations?user=oXpK8V8AAAAJ">Scholar ↗</a>
+            </div>
+          </article>
+          <article class="team-member">
+            <a href="https://lucanunz.github.io/">
+              <img src="assets/luca.webp" width="480" height="480" loading="lazy" alt="Luca Nunziante">
+            </a>
+            <h3>
+              <a href="https://lucanunz.github.io/">Luca Nunziante</a>
+            </h3>
+            <p>Equal contribution · Correspondence</p>
+            <div class="team-links">
+              <a href="mailto:luca_nunziante@araya.org">Email</a>
+              <a href="https://scholar.google.com/citations?user=0XjgMocAAAAJ">Scholar ↗</a>
+            </div>
+          </article>
+          <article class="team-member">
+            <a href="https://dosssman.github.io/">
+              <img
+                src="assets/rousslan.webp"
+                width="480"
+                height="480"
+                loading="lazy"
+                alt="Rousslan Fernand Julien Dossa"
+              >
+            </a>
+            <h3>
+              <a href="https://dosssman.github.io/">
+                Rousslan Fernand
+                <br>
+                Julien Dossa
+              </a>
+            </h3>
+            <p>Araya Inc.</p>
+            <div class="team-links">
+              <a href="mailto:dossa@araya.org">Email</a>
+              <a href="https://scholar.google.com/citations?user=ZDWS2CMAAAAJ">Scholar ↗</a>
+            </div>
+          </article>
+          <article class="team-member">
+            <a href="https://kaixhin.com/">
+              <img src="assets/kai.webp" width="480" height="480" loading="lazy" alt="Kai Arulkumaran">
+            </a>
+            <h3>
+              <a href="https://kaixhin.com/">Kai Arulkumaran</a>
+            </h3>
+            <p>Araya Inc.</p>
+            <div class="team-links">
+              <a href="mailto:kai_arulkumaran@araya.org">Email</a>
+              <a href="https://scholar.google.com/citations?user=QKCypSoAAAAJ">Scholar ↗</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <div class="organization-logos container" aria-label="Organizations">
+        <a href="https://research.araya.org/">
+          <img src="assets/araya.png" width="699" height="181" loading="lazy" alt="Araya research">
+        </a>
+        <a href="https://brains.link/en">
+          <img
+            src="assets/internet-of-brains.png"
+            width="983"
+            height="181"
+            loading="lazy"
+            alt="Internet of Brains"
+          >
+        </a>
+      </div>
+    </main>
+    <footer class="site-footer">
+      <p>
+        Website layout inspired by
+        <a href="https://ar-bri-manip.github.io/">AR-BRI Manipulation</a>
+        and
+        <a href="https://coopopen.github.io/">CoopOpen</a>
+        , whose templates credit
+        <a href="https://mobipi.github.io/">Mobi-π</a>
+        and
+        <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>
+        .
+      </p>
+      <p>
+        Figures and results from the authors’ paper. Branding and portraits from the shared
+        project sites.
+      </p>
+    </footer>
+
+  </body>
+</html>

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://onestepflow.github.io/sitemap.xml
