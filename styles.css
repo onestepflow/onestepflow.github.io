@@ -285,6 +285,25 @@ figcaption > span {
   margin-top: 15px;
 }
 
+.subsection-title {
+  margin: 36px 0 16px;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.3;
+  text-align: center;
+}
+
+/* Figure 4 stacks the bar charts above the trajectory plot so labels stay legible. */
+.figure-pair {
+  display: grid;
+  justify-items: center;
+  gap: 20px;
+}
+
+.figure-pair > a:last-child {
+  max-width: 620px;
+}
+
 .task-labels {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -491,10 +510,74 @@ select {
   font-weight: 400;
 }
 
+.latency-table small {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+/* Real-world table: each cell holds "reference / 1 step" above its gap CI. */
+
+.results-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.results-table th,
+.results-table td {
+  padding: 9px 10px;
+  border-bottom: 1px solid var(--border);
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.results-table th:first-child {
+  text-align: left;
+}
+
+.results-table thead {
+  background: var(--surface);
+}
+
+.results-table .subhead th,
+.results-table .subhead td {
+  padding-block: 0 8px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.results-table thead tr:first-child th {
+  padding-bottom: 2px;
+}
+
+.results-table tbody th {
+  font-weight: 600;
+}
+
+.results-table td small {
+  display: block;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.results-table .pooled {
+  border-left: 1px solid var(--border);
+}
+
+.results-table .significant {
+  background: #fff4e5;
+}
+
 .table-note {
   margin-top: 14px;
   color: var(--muted);
   font-size: 13px;
+}
+
+.table-note + .prose {
+  margin-top: 22px;
 }
 
 .citation-toolbar {
@@ -739,6 +822,20 @@ pre code {
   .task-labels {
     gap: 4px;
     font-size: 10px;
+  }
+
+  .subsection-title {
+    margin-top: 28px;
+    font-size: 19px;
+  }
+
+  .results-table {
+    font-size: 12px;
+  }
+
+  .results-table th,
+  .results-table td {
+    padding: 8px 6px;
   }
 
   .latency-table {
