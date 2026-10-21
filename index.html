@@ -399,20 +399,25 @@
           </p>
         </div>
         <figure class="paper-figure robot-figure">
-          <img
-            src="assets/robot-suite.webp"
-            width="1980"
-            height="375"
-            loading="lazy"
-            alt="Four images of the Franka Panda robot performing the spoon-to-drawer, open-drawer, open-oven, and close-oven tasks from Figure 2 of the paper."
-          >
-          <div class="task-labels" aria-hidden="true">
-            <span>Spoon → drawer</span>
-            <span>Open drawer</span>
-            <span>Open oven</span>
-            <span>Close oven</span>
+          <div class="task-videos">
+            <div class="task-video">
+              <video src="assets/robot-spoon-drawer.mp4" poster="assets/robot-spoon-drawer.webp" width="224" height="224" autoplay muted loop playsinline preload="metadata" aria-label="The Franka Panda robot putting a spoon into a drawer."></video>
+              <span>Spoon → drawer</span>
+            </div>
+            <div class="task-video">
+              <video src="assets/robot-open-drawer.mp4" poster="assets/robot-open-drawer.webp" width="224" height="224" autoplay muted loop playsinline preload="metadata" aria-label="The Franka Panda robot opening a drawer."></video>
+              <span>Open drawer</span>
+            </div>
+            <div class="task-video">
+              <video src="assets/robot-open-oven.mp4" poster="assets/robot-open-oven.webp" width="224" height="224" autoplay muted loop playsinline preload="metadata" aria-label="The Franka Panda robot opening an oven door."></video>
+              <span>Open oven</span>
+            </div>
+            <div class="task-video">
+              <video src="assets/robot-close-oven.mp4" poster="assets/robot-close-oven.webp" width="224" height="224" autoplay muted loop playsinline preload="metadata" aria-label="The Franka Panda robot closing an oven door."></video>
+              <span>Close oven</span>
+            </div>
           </div>
-          <figcaption>Real-world Franka suite · Figure 2 from the paper</figcaption>
+          <figcaption>Real-world Franka suite · successful one-step π₀.₅ rollouts</figcaption>
         </figure>
         <div class="prose text-container">
           <p>

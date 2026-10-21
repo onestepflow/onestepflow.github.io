@@ -314,13 +314,21 @@ figcaption > span {
   max-width: 620px;
 }
 
-.task-labels {
+.task-videos {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 8px;
-  margin-top: 10px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px 12px;
+  max-width: 640px;
+  margin-inline: auto;
   font-size: 14px;
   text-align: center;
+}
+
+.task-video video {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-bottom: 8px;
 }
 
 /* Term tooltip: opens on hover or focus without JavaScript; script.js adds tap and Escape. */
@@ -898,9 +906,9 @@ pre code {
     margin-top: 6px;
   }
 
-  .task-labels {
-    gap: 4px;
-    font-size: 10px;
+  .task-videos {
+    gap: 12px 8px;
+    font-size: 13px;
   }
 
   .subsection-title {

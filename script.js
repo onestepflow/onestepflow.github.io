@@ -264,3 +264,12 @@ if (copyButton && citation && copyStatus) {
     }
   });
 }
+
+// Robot rollout videos autoplay; respect a reduced-motion preference by pausing them.
+if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  document.querySelectorAll('.task-video video').forEach((video) => {
+    video.pause();
+    video.removeAttribute('autoplay');
+    video.controls = true;
+  });
+}
