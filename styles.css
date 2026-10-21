@@ -476,6 +476,7 @@ select {
 }
 
 .chart-verdict,
+.chart-ci,
 .chart-heading > :nth-child(4) {
   grid-area: verdict;
 }
@@ -493,8 +494,19 @@ select {
 }
 
 .chart-row {
+  position: relative;
   padding-block: 12px;
   border-bottom: 1px solid #eeeeee;
+}
+
+.chart-row[tabindex] {
+  cursor: default;
+  outline-offset: -2px;
+}
+
+.chart-row[tabindex]:hover,
+.chart-row[tabindex]:focus-visible {
+  background: var(--surface);
 }
 
 .chart-row:last-child {
@@ -563,6 +575,47 @@ select {
 
 .chart-verdict {
   text-align: right;
+}
+
+.chart-ci {
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* CI of the paired gap behind the TOST verdict, shown on row hover or focus. */
+.chart-ci-popup {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% - 6px);
+  z-index: 10;
+  padding: 7px 10px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text);
+  background: #ffffff;
+  box-shadow: 0 4px 16px rgb(0 0 0 / 12%);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.45;
+  white-space: nowrap;
+  pointer-events: none;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.15s, visibility 0.15s;
+}
+
+.chart-ci-popup small {
+  display: block;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.chart-row:hover .chart-ci-popup,
+.chart-row:focus .chart-ci-popup {
+  visibility: visible;
+  opacity: 1;
 }
 
 /* TOST verdict colors match the paper's tables. */
@@ -883,7 +936,8 @@ pre code {
   }
 
   .chart-model,
-  .chart-value {
+  .chart-value,
+  .chart-ci {
     font-size: 11px;
   }
 
