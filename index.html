@@ -303,14 +303,12 @@
             A single step is exact only if the learned flow is straight. Although each
             training target is a straight line, these lines cross, so the learned paths
             are generally curved. In image generation, collapsing such flows to one or a
-            few steps sharply degrades sample quality, which has motivated distillation,
-            consistency, shortcut, and MeanFlow objectives that recover single-step
-            generation.
+            few steps sharply degrades sample quality, which has motivated additional
+            methods to recover single-step generation (e.g., distillation, consistency).
           </p>
           <p>
             Robot actions, however, are not images. Given the current observation, the
-            action distribution may differ substantially from the image setting, and
-            prior work finds that multimodality is largely absent from robotics datasets.
+            action distribution may differ substantially from the image setting.
             The few-step methods applied to robotics were evaluated on small policies,
             where single-step inference is indeed substantially worse. Whether this
             degradation persists for large VLAs has not been thoroughly investigated.
@@ -350,7 +348,7 @@
             finds <strong>23 equivalent</strong>, 4 favoring multi-step, 2 favoring
             one-step, and 7 inconclusive.
             Equivalence uses a ±3 percentage-point margin for success rates; point
-            estimates alone do not establish equivalence. Hover to visualize the CI for Δ = SR<sub>ref</sub> - SR<sub>1</sub>.
+            estimates alone do not establish equivalence. Hover to visualize the 90% confidence interval (CI) for the success rate (SR) gap Δ = SR<sub>ref</sub> - SR<sub>1</sub>.
           </p>
         </div>
         <div class="results-panel">
@@ -755,7 +753,7 @@
         <div class="prose text-container">
           <p>
             <strong>Takeaway.</strong>
-            Step-equivalence is favoured by larger models, generic VLM pretraining, and longer fine-tuning. When one of these properties is missing, tasks with longer horizons tend to show step-dependence
+            Step-equivalence is favoured by larger models, generic VLM pretraining, and longer fine-tuning. When one of these properties is missing, tasks with longer horizons tend to show step-dependence.
           </p>
         </div>
       </section>
