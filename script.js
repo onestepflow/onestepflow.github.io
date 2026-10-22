@@ -6,6 +6,9 @@
  * Simulation verdicts follow Table 2's colouring. No real-world 90% CI lies within
  * ±3 pp, so the real-world view shows the CI itself instead of the verdict.
  * CIs come from TOST_analysis/gen_tost_verdict_tables.py (δ = 3 pp, α = 0.05).
+ * realTasks holds the per-task real-world cells (100 paired rollouts each) as
+ * [reference, one step, 90% CI low, 90% CI high, significant McNemar], with
+ * McNemar p-values Holm-adjusted across the four tasks of each model.
  */
 const models = [
   {
@@ -18,6 +21,12 @@ const models = [
       plus: [30.8, 28.6, 'inc', 1.29, 3.1],
       plus10: [22, 14.5, 'ref', 6.04, 8.81],
       real: [28.5, 30, 'inc', -5.01, 2.01],
+    },
+    realTasks: {
+      spoonDrawer: [33, 32, -8.24, 10.21],
+      openDrawer: [59, 64, -13.51, 3.63],
+      openOven: [0, 1, -4.36, 1.75],
+      closeOven: [22, 23, -7.25, 5.23],
     },
   },
   {
@@ -45,6 +54,12 @@ const models = [
       twinrand: [24.3, 23.3, 'eq', 0.39, 1.69],
       real: [29.2, 30.5, 'inc', -3.36, 0.85],
     },
+    realTasks: {
+      spoonDrawer: [0, 0, -2.63, 2.63],
+      openDrawer: [68, 72, -9.46, 1.44],
+      openOven: [0, 0, -2.63, 2.63],
+      closeOven: [49, 50, -7.48, 5.5],
+    },
   },
   {
     name: 'FLOWER',
@@ -60,6 +75,12 @@ const models = [
       calvin: [79.5, 77, 'inc', 0.41, 4.59],
       real: [59.8, 63.2, 'inc', -7.72, 0.74],
     },
+    realTasks: {
+      spoonDrawer: [46, 50, -13.79, 5.92],
+      openDrawer: [81, 97, -22.93, -10.01, true],
+      openOven: [20, 31, -20, -1.8],
+      closeOven: [92, 75, 9.42, 24.75, true],
+    },
   },
   {
     name: 'π₀.₅',
@@ -71,6 +92,12 @@ const models = [
       plus: [86.4, 86.3, 'eq', -0.39, 0.63],
       plus10: [77.6, 76.1, 'eq', 0.25, 2.62],
       real: [79, 78.5, 'inc', -2.97, 3.98],
+    },
+    realTasks: {
+      spoonDrawer: [88, 90, -7.82, 3.68],
+      openDrawer: [78, 77, -3.79, 5.83],
+      openOven: [63, 73, -19.65, -0.08],
+      closeOven: [87, 74, 6.37, 19.86, true],
     },
   },
   {
@@ -84,6 +111,12 @@ const models = [
       plus10: [66.4, 65.7, 'eq', -0.51, 2.02],
       real: [74.2, 70.5, 'inc', 0.74, 6.76],
     },
+    realTasks: {
+      spoonDrawer: [75, 73, -4.8, 8.8],
+      openDrawer: [78, 76, -3.03, 7.09],
+      openOven: [56, 47, 1.07, 16.7],
+      closeOven: [88, 86, -2.6, 6.8],
+    },
   },
   {
     name: 'XR-0',
@@ -96,6 +129,12 @@ const models = [
       plus10: [70.2, 69.6, 'eq', -0.46, 1.74],
       calvin: [87.2, 88.1, 'eq', -2.33, 0.52],
       real: [71, 70.5, 'inc', -2.87, 3.87],
+    },
+    realTasks: {
+      spoonDrawer: [73, 69, -3.15, 11.12],
+      openDrawer: [81, 83, -6.67, 2.53],
+      openOven: [42, 42, -9.61, 9.61],
+      closeOven: [88, 88, -5.26, 5.26],
     },
   },
 ];
@@ -119,9 +158,9 @@ const notes = {
 };
 
 // Bold the higher success rate; ties stay plain, as in the paper's tables.
-function formatRate(value, other, series) {
+function formatRate(value, other, series, digits = 1) {
   const tag = value > other ? 'strong' : 'span';
-  return `<${tag} class="rate-${series}">${value.toFixed(1)}</${tag}>`;
+  return `<${tag} class="rate-${series}">${value.toFixed(digits)}</${tag}>`;
 }
 
 // Signed, one decimal, typographic minus: −0.1, +1.8.
@@ -131,72 +170,169 @@ function formatGap(value) {
   return `${rounded > 0 ? '+' : '−'}${Math.abs(rounded).toFixed(1)}`;
 }
 
+const realTaskColumns = [
+  ['spoonDrawer', 'Spoon → drawer'],
+  ['openDrawer', 'Open drawer'],
+  ['openOven', 'Open oven'],
+  ['closeOven', 'Close oven'],
+];
+
 const benchmarkSelect = document.querySelector('#benchmark');
+const perTaskToggle = document.querySelector('#per-task-toggle');
+const resultsPanel = document.querySelector('.results-panel');
+const chartHeading = document.querySelector('#chart-heading');
 const resultsChart = document.querySelector('#results-chart');
 const benchmarkNote = document.querySelector('#benchmark-note');
-const benchmarkSource = document.querySelector('#benchmark-source');
-const lastHeading = document.querySelector('#chart-last-heading');
+const taskNote = document.querySelector('#task-note');
+
+function renderPooledRow(model, benchmark, isReal) {
+  const [reference, one, verdict, ciLow, ciHigh] = model.scores[benchmark];
+  const steps = isReal && model.realSteps ? model.realSteps : model.steps;
+  const ci = `[${formatGap(ciLow)}, ${formatGap(ciHigh)}]`;
+  const ciLabel = `90% CI of the gap ${ci} percentage points`;
+  const lastColumn = isReal
+    ? `<div class="chart-ci" aria-hidden="true">${ci}</div>`
+    : `<div class="chart-verdict" aria-hidden="true">
+        <span class="verdict verdict-${verdict}">${verdicts[verdict]}</span>
+      </div>
+      <div class="chart-ci-popup" aria-hidden="true">
+        90% CI <strong>${ci}</strong> pp
+      </div>`;
+
+  return `
+    <div
+      class="chart-row${isReal ? '' : ' ci-target'}"
+      role="group"
+      ${isReal ? '' : 'tabindex="0"'}
+      aria-label="${model.name}: ${steps} reference steps ${reference.toFixed(1)} percent; one step ${one.toFixed(1)} percent; ${isReal ? ciLabel : `TOST: ${verdicts[verdict]}; ${ciLabel}`}."
+    >
+      <div class="chart-model">
+        ${model.name}
+        <small>${model.detail}</small>
+      </div>
+      <div class="chart-bars" aria-hidden="true">
+        <div class="chart-bar reference" style="--value: ${reference}%"></div>
+        <div class="chart-bar one" style="--value: ${one}%"></div>
+      </div>
+      <div class="chart-value" aria-hidden="true">
+        ${formatRate(reference, one, 'reference')}
+        <span class="slash">/</span>
+        ${formatRate(one, reference, 'one')}
+      </div>
+      ${lastColumn}
+    </div>
+  `;
+}
+
+// One task (or the pooled total): reference / one-step rates, CI only on hover or focus.
+function renderTaskCell(model, label, [reference, one, ciLow, ciHigh, significant], pooled) {
+  const steps = model.realSteps || model.steps;
+  const digits = pooled ? 1 : 0;
+  const ci = `[${formatGap(ciLow)}, ${formatGap(ciHigh)}]`;
+  const mcnemar = significant ? '; significant McNemar difference' : '';
+
+  return `
+    <div
+      class="task-cell ci-target${pooled ? ' pooled' : ''}"
+      tabindex="0"
+      aria-label="${model.name}, ${label}: ${steps} reference steps ${reference.toFixed(digits)} percent; one step ${one.toFixed(digits)} percent; 90% CI of the gap ${ci} percentage points${mcnemar}."
+    >
+      <div class="task-rate" aria-hidden="true">
+        ${formatRate(reference, one, 'reference', digits)}<span class="slash">/</span>${formatRate(one, reference, 'one', digits)}${significant ? '<sup class="task-significant">*</sup>' : ''}
+      </div>
+      <div class="chart-ci-popup" aria-hidden="true">
+        90% CI <strong>${ci}</strong> pp
+        ${significant ? '<small>Significant McNemar difference</small>' : ''}
+      </div>
+    </div>
+  `;
+}
+
+function renderTaskRow(model) {
+  const [reference, one, , ciLow, ciHigh] = model.scores.real;
+  const cells = realTaskColumns.map(([key, label]) =>
+    renderTaskCell(model, label, model.realTasks[key], false),
+  );
+  cells.push(renderTaskCell(model, 'pooled', [reference, one, ciLow, ciHigh], true));
+
+  return `
+    <div class="chart-row" role="group" aria-label="${model.name}">
+      <div class="chart-model">
+        ${model.name}
+        <small>${model.detail}</small>
+      </div>
+      ${cells.join('')}
+    </div>
+  `;
+}
 
 function renderResults() {
   const benchmark = benchmarkSelect.value;
   const isReal = benchmark === 'real';
+  const perTask = isReal && perTaskToggle?.getAttribute('aria-checked') === 'true';
+  const visibleModels = models.filter((model) => model.scores[benchmark]);
 
-  resultsChart.innerHTML = models
-    .filter((model) => model.scores[benchmark])
-    .map((model) => {
-      const [reference, one, verdict, ciLow, ciHigh] = model.scores[benchmark];
-      const steps = isReal && model.realSteps ? model.realSteps : model.steps;
-      const ci = `[${formatGap(ciLow)}, ${formatGap(ciHigh)}]`;
-      const ciLabel = `90% CI of the gap ${ci} percentage points`;
-      const lastColumn = isReal
-        ? `<div class="chart-ci" aria-hidden="true">${ci}</div>`
-        : `<div class="chart-verdict" aria-hidden="true">
-            <span class="verdict verdict-${verdict}">${verdicts[verdict]}</span>
-          </div>
-          <div class="chart-ci-popup" aria-hidden="true">
-            90% CI <strong>${ci}</strong> pp
-          </div>`;
+  if (perTaskToggle) perTaskToggle.hidden = !isReal;
+  resultsPanel?.classList.toggle('per-task', perTask);
 
-      return `
-        <div
-          class="chart-row"
-          role="group"
-          ${isReal ? '' : 'tabindex="0"'}
-          aria-label="${model.name}: one step ${one.toFixed(1)} percent; ${steps} reference steps ${reference.toFixed(1)} percent; ${isReal ? ciLabel : `TOST: ${verdicts[verdict]}; ${ciLabel}`}."
-        >
-          <div class="chart-model">
-            ${model.name}
-            <small>${model.detail}</small>
-          </div>
-          <div class="chart-bars" aria-hidden="true">
-            <div class="chart-bar one" style="--value: ${one}%"></div>
-            <div class="chart-bar reference" style="--value: ${reference}%"></div>
-          </div>
-          <div class="chart-value" aria-hidden="true">
-            ${formatRate(one, reference, 'one')}
-            <span class="slash">/</span>
-            ${formatRate(reference, one, 'reference')}
-          </div>
-          ${lastColumn}
-        </div>
-      `;
-    })
+  if (chartHeading) {
+    const columns = perTask
+      ? ['MODEL', ...realTaskColumns.map(([, label]) => label.toUpperCase()), 'POOLED']
+      : ['MODEL', 'SUCCESS RATE (%)', 'REF. / 1 STEP', isReal ? 'Δ 90% CI (PP)' : 'TOST'];
+    chartHeading.innerHTML = columns.map((column) => `<span>${column}</span>`).join('');
+  }
+
+  resultsChart.innerHTML = visibleModels
+    .map((model) => (perTask ? renderTaskRow(model) : renderPooledRow(model, benchmark, isReal)))
     .join('');
 
-  if (lastHeading) {
-    lastHeading.textContent = isReal ? 'Δ 90% CI (PP)' : 'TOST';
-  }
-
+  // The per-task note is static markup so its McNemar tooltip is wired up at load.
   benchmarkNote.textContent = notes[benchmark];
-
-  if (benchmarkSource) {
-    benchmarkSource.textContent = `Source: Table ${benchmark === 'real' ? 3 : 2}`;
-  }
+  benchmarkNote.hidden = perTask && Boolean(taskNote);
+  if (taskNote) taskNote.hidden = !perTask;
 }
 
 if (benchmarkSelect && resultsChart && benchmarkNote) {
   benchmarkSelect.addEventListener('change', renderResults);
+  perTaskToggle?.addEventListener('click', () => {
+    const checked = perTaskToggle.getAttribute('aria-checked') === 'true';
+    perTaskToggle.setAttribute('aria-checked', String(!checked));
+    renderResults();
+  });
   renderResults();
+
+  // With a mouse, the CI popup sits just above the cursor and follows it;
+  // keyboard focus and touch keep the fixed position from the stylesheet.
+  // The popup is clamped to its row, whether it belongs to a row or a task cell.
+  const cursorOffset = 14;
+
+  resultsChart.addEventListener('pointermove', (event) => {
+    if (event.pointerType !== 'mouse') return;
+    const target = event.target.closest('.ci-target');
+    const popup = target?.querySelector(':scope > .chart-ci-popup');
+    if (!popup) return;
+
+    const rowBounds = target.closest('.chart-row').getBoundingClientRect();
+    const targetBounds = target.getBoundingClientRect();
+    const maxLeft = rowBounds.width - popup.offsetWidth;
+    const left = Math.max(0, Math.min(event.clientX - rowBounds.left + cursorOffset, maxLeft));
+
+    target.classList.add('ci-follows-pointer');
+    popup.style.left = `${left - (targetBounds.left - rowBounds.left)}px`;
+    popup.style.top = `${event.clientY - targetBounds.top - popup.offsetHeight - cursorOffset}px`;
+  });
+
+  // Keep the last cursor position while the popup fades out, but return to
+  // the fixed position when a row or cell is reached with the keyboard.
+  resultsChart.addEventListener('focusin', (event) => {
+    const target = event.target.closest('.ci-target');
+    const popup = target?.querySelector(':scope > .chart-ci-popup');
+    if (!popup || !target.matches(':focus-visible')) return;
+
+    target.classList.remove('ci-follows-pointer');
+    popup.style.left = '';
+    popup.style.top = '';
+  });
 }
 
 /*

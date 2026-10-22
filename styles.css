@@ -266,6 +266,10 @@ figcaption > span {
   font-weight: 600;
 }
 
+figcaption > .term-tip {
+  font-weight: inherit;
+}
+
 .overview-summary {
   max-width: 850px;
   margin-inline: auto;
@@ -412,6 +416,61 @@ figcaption > span {
   gap: 7px;
   font-size: 14px;
   font-weight: 600;
+}
+
+.results-options {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 12px 20px;
+}
+
+/* Per-task switch, shown only for the real-world benchmark. */
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 38px;
+  padding: 0;
+  border: 0;
+  color: var(--text);
+  background: none;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.toggle[hidden] {
+  display: none;
+}
+
+.toggle-track {
+  position: relative;
+  flex: none;
+  width: 32px;
+  height: 18px;
+  border-radius: 9px;
+  background: #bbbbbb;
+  transition: background 0.15s;
+}
+
+.toggle-track::after {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #ffffff;
+  content: '';
+  transition: transform 0.15s;
+}
+
+.toggle[aria-checked='true'] .toggle-track {
+  background: var(--link);
+}
+
+.toggle[aria-checked='true'] .toggle-track::after {
+  transform: translateX(14px);
 }
 
 select {
@@ -568,7 +627,8 @@ select {
   color: var(--reference);
 }
 
-.chart-value .slash {
+.chart-value .slash,
+.task-rate .slash {
   padding-inline: 5px;
   color: var(--muted);
 }
@@ -584,7 +644,7 @@ select {
   white-space: nowrap;
 }
 
-/* CI of the paired gap behind the TOST verdict, shown on row hover or focus. */
+/* CI of the paired gap, shown on hover or focus of a row or task cell. */
 .chart-ci-popup {
   position: absolute;
   right: 0;
@@ -606,14 +666,85 @@ select {
   transition: opacity 0.15s, visibility 0.15s;
 }
 
+/* script.js sets left and top from the mouse position. */
+.ci-follows-pointer .chart-ci-popup {
+  right: auto;
+  bottom: auto;
+}
+
+/* Per-task view: one column per real-world task plus the pooled total. */
+.per-task .chart-heading,
+.per-task .chart-row {
+  grid-template-columns: 130px repeat(5, minmax(0, 1fr));
+  grid-template-areas: none;
+  gap: 4px 12px;
+}
+
+.per-task .chart-heading > *,
+.per-task .chart-model {
+  grid-area: auto;
+}
+
+.per-task .chart-heading > :nth-child(n + 2) {
+  padding-left: 6px;
+  text-align: left;
+}
+
+.per-task .chart-heading > :last-child,
+.task-cell.pooled {
+  padding-left: 12px;
+  border-left: 1px solid var(--border);
+}
+
+.task-cell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 4px 6px;
+  border-radius: 3px;
+  cursor: default;
+  outline-offset: -2px;
+}
+
+.task-cell.pooled {
+  border-radius: 0 3px 3px 0;
+}
+
+.task-cell:hover,
+.task-cell:focus-visible {
+  background: var(--surface);
+}
+
+.task-rate {
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.task-rate .rate-one {
+  color: var(--one-step);
+}
+
+.task-rate .rate-reference {
+  color: var(--reference);
+}
+
+.task-significant {
+  margin-left: 1px;
+  line-height: 0;
+  color: var(--muted);
+  font-weight: 600;
+}
+
 .chart-ci-popup small {
   display: block;
   color: var(--muted);
   font-size: 11px;
 }
 
-.chart-row:hover .chart-ci-popup,
-.chart-row:focus .chart-ci-popup {
+.ci-target:hover > .chart-ci-popup,
+.ci-target:focus > .chart-ci-popup {
   visibility: visible;
   opacity: 1;
 }
@@ -654,10 +785,6 @@ select {
   border-top: 1px solid var(--border);
   color: var(--muted);
   font-size: 12px;
-}
-
-.chart-footer > span {
-  white-space: nowrap;
 }
 
 /* Inference table and BibTeX. */
@@ -841,6 +968,12 @@ pre code {
     row-gap: 4px;
   }
 
+  .per-task .chart-heading,
+  .per-task .chart-row {
+    grid-template-columns: 110px repeat(5, minmax(0, 1fr));
+    gap: 4px 8px;
+  }
+
   .organization-logos img {
     max-width: 260px;
     height: 45px;
@@ -935,6 +1068,42 @@ pre code {
     font-size: 10px;
   }
 
+  .results-options {
+    width: 100%;
+  }
+
+  .per-task .chart-heading,
+  .per-task .chart-row {
+    grid-template-columns: 64px repeat(5, minmax(0, 1fr));
+    gap: 4px 4px;
+  }
+
+  .per-task .chart-heading > :last-child,
+  .task-cell.pooled {
+    padding-left: 4px;
+  }
+
+  .task-cell {
+    padding-inline: 2px;
+  }
+
+  .per-task .chart-heading > :nth-child(n + 2) {
+    text-align: right;
+  }
+
+  .per-task .chart-model small {
+    display: none;
+  }
+
+  .task-rate {
+    font-size: 11px;
+    text-align: right;
+  }
+
+  .task-rate .slash {
+    padding-inline: 2px;
+  }
+
   .chart-model,
   .chart-value,
   .chart-ci {
@@ -953,11 +1122,6 @@ pre code {
   .chart-footer {
     display: block;
     font-size: 11px;
-  }
-
-  .chart-footer > span {
-    display: block;
-    margin-top: 6px;
   }
 
   .task-videos {
@@ -1024,7 +1188,9 @@ pre code {
     scroll-behavior: auto;
   }
 
-  .term-tip-popup {
+  .term-tip-popup,
+  .toggle-track,
+  .toggle-track::after {
     transition: none;
   }
 }

@@ -341,37 +341,50 @@
         </div>
         <div class="results-panel">
           <div class="results-controls">
-            <label for="benchmark">
-              Explore a benchmark
-              <select id="benchmark">
-                <option value="libero">LIBERO · Spatial, Goal, Object</option>
-                <option value="libero10">LIBERO-10 · Long horizon</option>
-                <option value="plus">LIBERO+ · Spatial, Goal, Object</option>
-                <option value="plus10">LIBERO+ 10 · Long horizon</option>
-                <option value="calvin">CALVIN · Full-chain success</option>
-                <option value="twin">RoboTwin · Clean</option>
-                <option value="twinrand">RoboTwin · Randomized</option>
-                <option value="real">Real world · Franka, pooled</option>
-              </select>
-            </label>
+            <div class="results-options">
+              <label for="benchmark">
+                Explore a benchmark
+                <select id="benchmark">
+                  <option value="libero">LIBERO · Spatial, Goal, Object</option>
+                  <option value="libero10">LIBERO-10 · Long horizon</option>
+                  <option value="plus">LIBERO+ · Spatial, Goal, Object</option>
+                  <option value="plus10">LIBERO+ 10 · Long horizon</option>
+                  <option value="calvin">CALVIN · Full-chain success</option>
+                  <option value="twin">RoboTwin · Clean</option>
+                  <option value="twinrand">RoboTwin · Randomized</option>
+                  <option value="real">Real world · Franka</option>
+                </select>
+              </label>
+              <button
+                type="button"
+                id="per-task-toggle"
+                class="toggle"
+                role="switch"
+                aria-checked="false"
+                hidden
+              >
+                <span class="toggle-track" aria-hidden="true"></span>
+                Per-task breakdown
+              </button>
+            </div>
             <div class="legend">
-              <span>
-                <i class="legend-one">
-                </i>
-                1 step
-              </span>
               <span>
                 <i class="legend-ref">
                 </i>
                 Reference steps
               </span>
+              <span>
+                <i class="legend-one">
+                </i>
+                1 step
+              </span>
             </div>
           </div>
-          <div class="chart-heading">
+          <div id="chart-heading" class="chart-heading">
             <span>MODEL</span>
             <span>SUCCESS RATE (%)</span>
             <span>1 STEP / REF.</span>
-            <span id="chart-last-heading">TOST</span>
+            <span>TOST</span>
           </div>
           <div id="results-chart" class="results-chart" aria-live="polite" aria-atomic="true">
           </div>
@@ -383,7 +396,19 @@
           </noscript>
           <div class="chart-footer">
             <p id="benchmark-note">SGO aggregates the Spatial, Goal, and Object suites.</p>
-            <span id="benchmark-source">Source: Table 2</span>
+            <p id="task-note" hidden>
+              Per-task success over 100 paired rollouts; * marks a significant
+              <span class="term-tip">
+                <button type="button" class="term-tip-trigger" aria-describedby="mcnemar-task-tip">McNemar</button>
+                <span id="mcnemar-task-tip" class="term-tip-popup" role="tooltip">
+                  <strong>McNemar's</strong> test is a statistical test on paired data: in this case we compare one-step and multi-step inference
+                  on the same matched initial conditions and noise streams. A small p-value means that one condition
+                  is significantly better than the other.
+                </span>
+              </span>
+              difference (Holm-adjusted within each model, p &lt; 0.05). Hover a cell for the
+              90% CI of the gap.
+            </p>
           </div>
         </div>
       </section>
@@ -431,13 +456,12 @@
                 is significantly better than the other.
               </span>
             </span>
-            difference, and they run            in both directions: the reference is better on <em>Close Oven</em> for π₀.₅
+            difference, and they run in both directions: the reference is better on <em>Close Oven</em> for π₀.₅
             and FLOWER, while one step is better for FLOWER on <em>Open Drawer</em>.
-            Pooled per-model gaps are small and bidirectional, with 4 of 6 models within
-            ±2 pp. For LAP, a genuine multi-step advantage cannot be ruled out there.
-<!--             The physical evaluation budget does not establish equivalence within ±3 pp. -->
-            Select <em>Real world</em> in the benchmark explorer above for pooled
-            success rates per model.
+            Pooled per-model gaps are small and bidirectional,with LAP being the only model
+            showing a constant benefit from multi-step inference.
+            <!-- The physical evaluation budget does not establish equivalence within ±3 pp. -->
+            Select <em>Real world</em> in the benchmark explorer above to see real-world results.
           </p>
         </div>
       </section>
@@ -777,7 +801,7 @@
           </table>
         </div>
         <p class="table-note">
-          Source: Table 1. Speedups depend on the relative cost of the VLM backbone and
+          Speedups depend on the relative cost of the VLM backbone and
           action head. The largest speedup is for SmolVLA, whose success rates are not
           consistently step-equivalent.
         </p>
