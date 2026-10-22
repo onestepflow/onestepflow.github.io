@@ -393,6 +393,33 @@ document.addEventListener('keydown', (event) => {
   }
 });
 
+/*
+ * D3IL Avoiding paths per model (Figure 4b), rendered by
+ * d3il/plot_paper_figure.py --layout wide --split --paths-policy <model>.
+ */
+const trajectoryAlts = {
+  dit: 'DiT end-effector paths around obstacles. With one step, every rollout follows a single route on the right; with ten steps, most follow that route, a few branch off, and some fail.',
+  xvla: 'X-VLA end-effector paths around obstacles. With one step and with ten steps, rollouts follow the same single route along the left, with some failed rollouts in both.',
+  flower: 'FLOWER end-effector paths around obstacles. With one step, rollouts sweep in a wide arc around the right side to the goal; with four steps, most rollouts fail on a straight path up the middle-right.',
+  pi05: 'π₀.₅ end-effector paths around obstacles. With one step, paths concentrate on a few routes; with ten steps they spread across many routes.',
+  lap: 'LAP end-effector paths around obstacles. With one step, every rollout follows a single route on the right; with ten steps, most follow that route and a few spread to other routes.',
+  xr0: 'XR-0 end-effector paths around obstacles. With one step and with five steps, paths spread across several routes, slightly more so with five steps.',
+};
+const trajectorySelect = document.querySelector('#trajectory-model');
+const trajectoryLink = document.querySelector('#trajectory-link');
+const trajectoryImage = document.querySelector('#trajectory-image');
+
+if (trajectorySelect && trajectoryLink && trajectoryImage) {
+  trajectorySelect.closest('label').hidden = false;
+  trajectorySelect.addEventListener('change', () => {
+    const model = trajectorySelect.value;
+    const src = `assets/d3il-trajectories-${model}.webp`;
+    trajectoryLink.href = src;
+    trajectoryImage.src = src;
+    trajectoryImage.alt = `Paper Figure 4b: ${trajectoryAlts[model]}`;
+  });
+}
+
 const copyButton = document.querySelector('#copy-citation');
 const citation = document.querySelector('#bibtex');
 const copyStatus = document.querySelector('#copy-status');

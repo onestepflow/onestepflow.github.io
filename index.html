@@ -637,26 +637,42 @@
                 alt="Paper Figure 4a: bar charts of D3IL Avoiding success rate and normalized strategy entropy for one step and reference steps. One step reaches 100% success for DiT, FLOWER, and LAP but has lower entropy for every model except X-VLA."
               >
             </a>
-            <a
-              href="assets/d3il-trajectories.webp"
-              target="_blank"
-              rel="noopener"
-              aria-label="Open Figure 4b at full resolution"
-            >
-              <img
-                src="assets/d3il-trajectories.webp"
-                width="999"
-                height="587"
-                loading="lazy"
-                alt="Paper Figure 4b: π₀.₅ end-effector paths around obstacles. With one step, paths concentrate on a few routes; with ten steps they spread across many routes."
+            <div class="trajectory-view">
+              <label for="trajectory-model" hidden>
+                Show trajectories for
+                <select id="trajectory-model">
+                  <option value="dit">DiT</option>
+                  <option value="xvla">X-VLA</option>
+                  <option value="flower">FLOWER</option>
+                  <option value="pi05" selected>π₀.₅</option>
+                  <option value="lap">LAP</option>
+                  <option value="xr0">XR-0</option>
+                </select>
+              </label>
+              <a
+                id="trajectory-link"
+                href="assets/d3il-trajectories-pi05.webp"
+                target="_blank"
+                rel="noopener"
+                aria-label="Open Figure 4b at full resolution"
               >
-            </a>
+                <img
+                  id="trajectory-image"
+                  src="assets/d3il-trajectories-pi05.webp"
+                  width="999"
+                  height="594"
+                  loading="lazy"
+                  alt="Paper Figure 4b: π₀.₅ end-effector paths around obstacles. With one step, paths concentrate on a few routes; with ten steps they spread across many routes."
+                >
+              </a>
+            </div>
           </div>
           <figcaption>
             <span>Fig. 4</span>
             D3IL Avoiding. Top: success rate with 95% CIs (* marks a significant
             McNemar difference, p &lt; 0.05) and normalized strategy entropy. Bottom:
-            trajectories executed by π₀.₅ with 1 and 10 steps; grey lines are failed
+            trajectories executed by the selected model with 1 step and its reference
+            step count (10, except FLOWER 4 and XR-0 5); grey lines are failed
             rollouts.
           </figcaption>
         </figure>

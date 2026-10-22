@@ -323,8 +323,28 @@ figcaption > .term-tip {
   gap: 20px;
 }
 
-.figure-pair > a:last-child {
+.trajectory-view {
+  display: grid;
+  justify-items: center;
+  gap: 12px;
+  width: 100%;
   max-width: 620px;
+}
+
+.trajectory-view label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.trajectory-view label[hidden] {
+  display: none;
+}
+
+.trajectory-view select {
+  width: 140px;
 }
 
 .task-videos {
