@@ -267,7 +267,7 @@
             >
           </a>
           <figcaption>
-            <span>FIG. 1</span>
+            <span>Fig. 1</span>
             One-step vs. reference-step success rates across every (model, benchmark)
             cell. Points near the diagonal indicate a negligible gap
             Δ = SR<sub>ref</sub> − SR<sub>1</sub>. For the three largest models
@@ -480,260 +480,6 @@
         </div>
       </section>
 
-      <section id="analysis" class="section container" aria-labelledby="analysis-title">
-        <h2 id="analysis-title">Analysis</h2>
-        <div class="prose text-container">
-          <p>
-            A binary success rate does not capture how the robot moves. We therefore ask
-            two further questions: does one-step inference make the executed motion less
-            smooth, and does it narrow the range of behaviors a policy produces?
-          </p>
-        </div>
-
-        <h3 id="smoothness-title" class="subsection-title">Trajectory Smoothness</h3>
-        <div class="prose text-container">
-          <p>
-            We compare the RMS joint jerk of paired real-world rollouts in which both
-            variants succeed, since failures produce different jerk profiles. There is
-            no consistent smoothness cost to one-step inference: the multi-step
-            reference is meaningfully smoother only for the two sub-1B models (DiT,
-            FLOWER), while for every model above 1B, one-step motion is marginally
-            smoother. This mirrors the scale dependence of the success-rate results.
-          </p>
-        </div>
-        <figure class="paper-figure">
-          <a
-            href="assets/smoothness.webp"
-            target="_blank"
-            rel="noopener"
-            aria-label="Open Figure 3 at full resolution"
-          >
-            <img
-              src="assets/smoothness.webp"
-              width="2004"
-              height="439"
-              loading="lazy"
-              alt="Paper Figure 3: violin plots of the paired log-ratio of reference-step to one-step jerk. DiT and FLOWER lie left of zero (multi-step smoother); X-VLA, π₀.₅, LAP, and XR-0 lie right of zero (one step smoother)."
-            >
-          </a>
-          <figcaption>
-            <span>FIG. 3</span>
-            Paired jerk-RMS comparison of real-world rollouts. Positive values of
-            log(d<sub>ref</sub>/d<sub>1</sub>) mean the one-step rollout is smoother.
-            Boxes give quartiles with 5–95% whiskers; the colored line is the median;
-            n counts pairs where both runs succeed.
-            <a href="assets/smoothness.webp" target="_blank" rel="noopener">View full size ↗</a>
-          </figcaption>
-        </figure>
-
-        <h3 id="diversity-title" class="subsection-title">Trajectory Diversity</h3>
-        <div class="prose text-container">
-          <p>
-            D3IL Avoiding is a multimodal control task with 24 valid ways to succeed. We
-            built a visual version of the task and run 200 episodes per model with
-            matched initial states and policy noise. One-step inference improves success
-            for DiT and FLOWER, lowers it for X-VLA, and never hurts the larger models.
-            It does, however, narrow behavior: under one step, DiT, FLOWER, and LAP each
-            collapse onto a single successful strategy while keeping at least 99.5%
-            success, and π₀.₅ drops from 19 observed successful strategies to 8.
-          </p>
-        </div>
-        <figure class="paper-figure diversity-figure">
-          <div class="figure-pair">
-            <a
-              href="assets/d3il-success-entropy.webp"
-              target="_blank"
-              rel="noopener"
-              aria-label="Open Figure 4a at full resolution"
-            >
-              <img
-                src="assets/d3il-success-entropy.webp"
-                width="1797"
-                height="532"
-                loading="lazy"
-                alt="Paper Figure 4a: bar charts of D3IL Avoiding success rate and normalized strategy entropy for one step and reference steps. One step reaches 100% success for DiT, FLOWER, and LAP but has lower entropy for every model except X-VLA."
-              >
-            </a>
-            <a
-              href="assets/d3il-trajectories.webp"
-              target="_blank"
-              rel="noopener"
-              aria-label="Open Figure 4b at full resolution"
-            >
-              <img
-                src="assets/d3il-trajectories.webp"
-                width="999"
-                height="587"
-                loading="lazy"
-                alt="Paper Figure 4b: π₀.₅ end-effector paths around obstacles. With one step, paths concentrate on a few routes; with ten steps they spread across many routes."
-              >
-            </a>
-          </div>
-          <figcaption>
-            <span>FIG. 4</span>
-            D3IL Avoiding. Top: success rate with 95% CIs (* marks a significant
-            McNemar difference, p &lt; 0.05) and normalized strategy entropy. Bottom:
-            trajectories executed by π₀.₅ with 1 and 10 steps; grey lines are failed
-            rollouts.
-          </figcaption>
-        </figure>
-
-        <div class="prose text-container">
-          <p>
-            <strong>Takeaway.</strong>
-            For models above 1B parameters, one-step inference costs neither task
-            success nor smoothness, but it concentrates behavior on fewer strategies.
-            Where behavioral diversity matters, success rate alone hides this
-            difference.
-          </p>
-        </div>
-      </section>
-
-      <section id="ablations" class="section container" aria-labelledby="ablations-title">
-        <h2 id="ablations-title">Ablations</h2>
-        <div class="prose text-container">
-          <p>
-            The main results show that multi-step inference does not guarantee higher
-            success rates. To understand when step-equivalence emerges, we train models
-            on LIBERO from different initializations and evaluate checkpoints throughout
-            training. LIBERO pairs the short-horizon Spatial, Goal, and Object (SGO)
-            suites with the long-horizon LIBERO-10 suite, where most gaps appear. We ask
-            two research questions:
-          </p>
-        </div>
-        <ul class="question-list text-container">
-          <li>
-            <strong>Q1.</strong>
-            How do model scale and pretraining influence step-equivalence?
-          </li>
-          <li>
-            <strong>Q2.</strong>
-            How does the gap evolve over the course of training?
-          </li>
-        </ul>
-
-        <h3 id="findings-title" class="subsection-title">Key Findings</h3>
-        <ul class="findings-list text-container">
-          <li>
-            <strong>Step-equivalence depends on scale, VLM pretraining, and training maturity.</strong>
-            π₀.₅ and XR-0 are equivalent within 3 pp on every simulation benchmark with
-            an available checkpoint, and X-VLA and LAP on all but one each. Pretrained
-            visual-language features favor step-equivalence even without robot-action
-            pretraining, and the gap fades with longer fine-tuning.
-          </li>
-          <li>
-            <strong>Longer task horizons expose step sensitivity.</strong>
-            The two smaller VLAs (FLOWER, SmolVLA) keep a gap that is larger on
-            long-horizon tasks, while their short-horizon performance is robust. Extra
-            Euler steps do not always help: the direction of the gap varies across the
-            smaller models.
-          </li>
-          <li>
-            <strong>No systematic real-world advantage for multi-step inference.</strong>
-            Pooled gaps on the Franka suite are small and run in both directions, and
-            one-step motion is no less smooth for any model above 1B parameters.
-          </li>
-          <li>
-            <strong>Task success and behavioral diversity can differ.</strong>
-            On D3IL Avoiding, one-step inference preserves success while narrowing the
-            range of successful strategies.
-          </li>
-          <li>
-            <strong>Practical payoff.</strong>
-            A single Euler step gives 1.6× to 4.8× lower action-generation latency for
-            the evaluated VLAs.
-          </li>
-        </ul>
-
-        <h3 id="answers-title" class="subsection-title">Answering the Research Questions</h3>
-        <div class="prose text-container">
-          <p>
-            <strong>Q1: largely answered.</strong>
-            Larger models with pretrained vision-language features reach
-            step-equivalence, and robot-action pretraining is not required. We trained
-            π₀.₅ and X-VLA from scratch, from a generic VLM (PaliGemma2 or Florence) or
-            the VLA's own VLM backbone with a randomly initialized action expert, and
-            from the full pretrained VLA. All three pretrained initializations reach
-            step-equivalence on SGO, with near-zero gaps by the final checkpoint.
-            Pretrained features alone are not enough, though: the 211M DiT, built on
-            pretrained CLIP encoders, develops a multi-step advantage on LIBERO-10 that
-            grows to 15 pp. It remains open whether training from scratch eventually
-            reaches step-equivalence: a randomly initialized π₀.₅ still favors one-step
-            inference at the final checkpoint, although its SGO gap narrows from −20 to
-            −3 pp.
-          </p>
-          <p>
-            <strong>Q2: answered.</strong>
-            Where multi-step inference helps, the benefit fades with training. We
-            evaluated every run at checkpoints throughout training. π₀.₅ is
-            step-equivalent on SGO from the earliest checkpoint. For X-VLA, extra Euler
-            steps hurt early in training, and that gap collapses by the end. FLOWER's
-            multi-step benefit is confined to LIBERO-10 at early and intermediate
-            checkpoints and disappears at the final one. Its residual gap in Table 2
-            therefore reflects the authors' early-stopped release checkpoint, not the
-            model's scale or architecture.
-          </p>
-        </div>
-        <figure class="paper-figure">
-          <a
-            href="assets/training.webp"
-            target="_blank"
-            rel="noopener"
-            aria-label="Open Figure 5 at full resolution"
-          >
-            <img
-              src="assets/training.webp"
-              width="2411"
-              height="834"
-              loading="lazy"
-              alt="Paper Figure 5: the success-rate gap between reference-step and one-step inference over training, in four columns (VLM initialization, X-VLA variants, π₀.₅ variants, pretrained VLAs) and two rows (LIBERO-10, LIBERO SGO). SGO gaps stay near zero; LIBERO-10 gaps are larger early and mostly fade with training, except for DiT, whose gap grows to about 15 points."
-            >
-          </a>
-          <figcaption>
-            <span>FIG. 5</span>
-            Step-count gap Δ = SR<sub>ref</sub> − SR<sub>1</sub> over training on
-            LIBERO, with shaded 90% CIs. Multi-step gains, when present, are
-            concentrated on LIBERO-10 and fade with training; the short-horizon suites
-            stay close to step-invariant throughout.
-            <a href="assets/training.webp" target="_blank" rel="noopener">View full size ↗</a>
-          </figcaption>
-        </figure>
-        <div class="prose text-container">
-          <p>
-            <strong>Action divergence vs. task success.</strong>
-            For the π₀.₅ initialization variants, the L2 distance between 1-step and
-            10-step actions and the success-rate gap shrink together over training. But
-            the pretrained variants can show large action divergence with a gap under
-            5 pp, while the from-scratch model turns a smaller divergence into an
-            18 pp gap. How far the two actions disagree does not by itself determine
-            task success.
-          </p>
-        </div>
-        <figure class="paper-figure training-figure">
-          <a
-            href="assets/action-divergence.webp"
-            target="_blank"
-            rel="noopener"
-            aria-label="Open Figure A1 at full resolution"
-          >
-            <img
-              src="assets/action-divergence.webp"
-              width="1806"
-              height="803"
-              loading="lazy"
-              alt="Appendix Figure A1: scatter plots of action L2 distance against the absolute success-rate gap for four π₀.₅ initialization variants on SGO and LIBERO-10, with one marker per checkpoint from 5k to 29k steps. The Scratch variant has the shallowest trend, reaching gaps near 20 points at moderate L2."
-            >
-          </a>
-          <figcaption>
-            <span>FIG. A1</span>
-            L2 distance between 1-step and 10-step actions (mm/step, first three action
-            dimensions) against the absolute success-rate gap. Each marker is a
-            checkpoint (5k–29k); dashed lines show per-variant trends.
-            <a href="assets/action-divergence.webp" target="_blank" rel="noopener">View full size ↗</a>
-          </figcaption>
-        </figure>
-      </section>
-
       <section id="latency" class="section container text-container" aria-labelledby="latency-title">
         <h2 id="latency-title">Inference Latency</h2>
         <div class="prose">
@@ -820,6 +566,232 @@
           consistently step-equivalent.
         </p>
       </section>
+
+      <section id="analysis" class="section container" aria-labelledby="analysis-title">
+        <h2 id="analysis-title">Analysis</h2>
+        <div class="prose text-container">
+          <p>
+            A binary success rate does not capture how the robot moves. We therefore ask
+            two further questions: does one-step inference make the executed motion less
+            smooth, and does it narrow the range of behaviors a policy produces?
+          </p>
+        </div>
+
+        <h3 id="smoothness-title" class="subsection-title">Trajectory Smoothness</h3>
+        <div class="prose text-container">
+          <p>
+            We compare the RMS joint jerk of paired real-world rollouts in which both
+            variants succeed, since failures produce different jerk profiles. There is
+            no consistent smoothness cost to one-step inference: the multi-step
+            reference is meaningfully smoother only for the two sub-1B models (DiT,
+            FLOWER), while for every model above 1B, one-step motion is marginally
+            smoother. This mirrors the scale dependence of the success-rate results.
+          </p>
+        </div>
+        <figure class="paper-figure">
+          <a
+            href="assets/smoothness.webp"
+            target="_blank"
+            rel="noopener"
+            aria-label="Open Figure 3 at full resolution"
+          >
+            <img
+              src="assets/smoothness.webp"
+              width="2004"
+              height="439"
+              loading="lazy"
+              alt="Paper Figure 3: violin plots of the paired log-ratio of reference-step to one-step jerk. DiT and FLOWER lie left of zero (multi-step smoother); X-VLA, π₀.₅, LAP, and XR-0 lie right of zero (one step smoother)."
+            >
+          </a>
+          <figcaption>
+            <span>Fig. 3</span>
+            Paired jerk-RMS comparison of real-world rollouts. Positive values of
+            log(d<sub>ref</sub>/d<sub>1</sub>) mean the one-step rollout is smoother.
+            Boxes give quartiles with 5–95% whiskers; the colored line is the median;
+            n counts pairs where both runs succeed.
+            <a href="assets/smoothness.webp" target="_blank" rel="noopener">View full size ↗</a>
+          </figcaption>
+        </figure>
+
+        <h3 id="diversity-title" class="subsection-title">Trajectory Diversity</h3>
+        <div class="prose text-container">
+          <p>
+            D3IL Avoiding is a multimodal control task with 24 valid ways to succeed. We
+            built a visual version of the task and run 200 episodes per model with
+            matched initial states and policy noise. One-step inference improves success
+            for DiT and FLOWER, lowers it for X-VLA, and never hurts the larger models.
+            It does, however, narrow behavior: under one step, DiT, FLOWER, and LAP each
+            collapse onto a single successful strategy while keeping at least 99.5%
+            success, and π₀.₅ drops from 19 observed successful strategies to 8.
+          </p>
+        </div>
+        <figure class="paper-figure diversity-figure">
+          <div class="figure-pair">
+            <a
+              href="assets/d3il-success-entropy.webp"
+              target="_blank"
+              rel="noopener"
+              aria-label="Open Figure 4a at full resolution"
+            >
+              <img
+                src="assets/d3il-success-entropy.webp"
+                width="1797"
+                height="532"
+                loading="lazy"
+                alt="Paper Figure 4a: bar charts of D3IL Avoiding success rate and normalized strategy entropy for one step and reference steps. One step reaches 100% success for DiT, FLOWER, and LAP but has lower entropy for every model except X-VLA."
+              >
+            </a>
+            <a
+              href="assets/d3il-trajectories.webp"
+              target="_blank"
+              rel="noopener"
+              aria-label="Open Figure 4b at full resolution"
+            >
+              <img
+                src="assets/d3il-trajectories.webp"
+                width="999"
+                height="587"
+                loading="lazy"
+                alt="Paper Figure 4b: π₀.₅ end-effector paths around obstacles. With one step, paths concentrate on a few routes; with ten steps they spread across many routes."
+              >
+            </a>
+          </div>
+          <figcaption>
+            <span>Fig. 4</span>
+            D3IL Avoiding. Top: success rate with 95% CIs (* marks a significant
+            McNemar difference, p &lt; 0.05) and normalized strategy entropy. Bottom:
+            trajectories executed by π₀.₅ with 1 and 10 steps; grey lines are failed
+            rollouts.
+          </figcaption>
+        </figure>
+
+        <div class="prose text-container">
+          <p>
+            <strong>Takeaway.</strong>
+            For models above 1B parameters, one-step inference costs neither task
+            success nor smoothness, but it concentrates behavior on fewer strategies.
+            Where behavioral diversity matters, success rate alone hides this
+            difference.
+          </p>
+        </div>
+      </section>
+
+      <section id="ablations" class="section container" aria-labelledby="ablations-title">
+        <h2 id="ablations-title">Ablations</h2>
+        <div class="prose text-container">
+          <p>
+            The main results show that multi-step inference does not guarantee higher
+            success rates. To understand when step-equivalence emerges, we train models
+            on LIBERO from different initializations and evaluate checkpoints throughout
+            training. LIBERO pairs the short-horizon Spatial, Goal, and Object (SGO)
+            suites with the long-horizon LIBERO-10 suite, where most gaps appear. We ask
+            two research questions:
+          </p>
+        </div>
+        <ul class="question-list text-container">
+          <li>
+            <strong>Q1.</strong>
+            How do model scale and pretraining influence step-equivalence?
+          </li>
+          <li>
+            <strong>Q2.</strong>
+            How does the gap evolve over the course of training?
+          </li>
+        </ul>
+
+        <h3 id="answers-title" class="subsection-title">Answering the Research Questions</h3>
+        <div class="prose text-container">
+          <p>
+            <strong>Q1</strong>
+            Larger models with pretrained vision-language features reach
+            step-equivalence, and robot-action pretraining is not required. We trained
+            π₀.₅ and X-VLA from scratch, from a generic VLM (PaliGemma2 or Florence) or
+            the VLA's own VLM backbone with a randomly initialized action expert, and
+            from the full pretrained VLA. All three pretrained initializations reach
+            step-equivalence on SGO, with near-zero gaps by the final checkpoint.
+            Pretrained features alone are not enough, though: the 211M DiT, built on
+            pretrained CLIP encoders, develops a multi-step advantage on LIBERO-10 that
+            grows to 15 pp. It remains open whether training from scratch eventually
+            reaches step-equivalence: a randomly initialized π₀.₅ still favors one-step
+            inference at the final checkpoint, although its SGO gap narrows from −20 to
+            −3 pp.
+          </p>
+          <p>
+            <strong>Q2</strong>
+            Where multi-step inference helps, the benefit fades with training. We
+            evaluated every run at checkpoints throughout training. π₀.₅ is
+            step-equivalent on SGO from the earliest checkpoint. For X-VLA, extra Euler
+            steps hurt early in training, and that gap collapses by the end. FLOWER's
+            multi-step benefit is confined to LIBERO-10 at early and intermediate
+            checkpoints and disappears at the final one. Its residual gap in Table 2
+            therefore reflects the authors' early-stopped release checkpoint, not the
+            model's scale or architecture.
+          </p>
+        </div>
+        <figure class="paper-figure">
+          <a
+            href="assets/training.webp"
+            target="_blank"
+            rel="noopener"
+            aria-label="Open Figure 5 at full resolution"
+          >
+            <img
+              src="assets/training.webp"
+              width="2411"
+              height="834"
+              loading="lazy"
+              alt="Paper Figure 5: the success-rate gap between reference-step and one-step inference over training, in four columns (VLM initialization, X-VLA variants, π₀.₅ variants, pretrained VLAs) and two rows (LIBERO-10, LIBERO SGO). SGO gaps stay near zero; LIBERO-10 gaps are larger early and mostly fade with training, except for DiT, whose gap grows to about 15 points."
+            >
+          </a>
+          <figcaption>
+            <span>Fig. 5</span>
+            Step-count gap Δ = SR<sub>ref</sub> − SR<sub>1</sub> over training on
+            LIBERO, with shaded 90% CIs. Multi-step gains, when present, are
+            concentrated on LIBERO-10 and fade with training; the short-horizon suites
+            stay close to step-invariant throughout.
+            <a href="assets/training.webp" target="_blank" rel="noopener">View full size ↗</a>
+          </figcaption>
+        </figure>
+        <div class="prose text-container">
+          <p>
+            <strong>Takeaway.</strong>
+            Step-equivalence is favoured by larger models, generic VLM pretraining, and longer fine-tuning. When one of these properties is missing, tasks with longer horizons tend to show step-dependence
+          </p>
+        </div>
+      </section>
+
+      <h3 id="findings-title" class="subsection-title">Key Findings</h3>
+        <ul class="findings-list text-container">
+          <li>
+            <strong>Step-equivalence depends on scale, VLM pretraining, and training maturity.</strong>
+            π₀.₅ and XR-0 are equivalent within 3 pp on every simulation benchmark with
+            an available checkpoint, and X-VLA and LAP on all but one each. Pretrained
+            visual-language features favor step-equivalence even without robot-action
+            pretraining, and the gap fades with longer fine-tuning.
+          </li>
+          <li>
+            <strong>Longer task horizons expose step sensitivity.</strong>
+            The two smaller VLAs (FLOWER, SmolVLA) keep a gap that is larger on
+            long-horizon tasks, while their short-horizon performance is robust. Extra
+            Euler steps do not always help: the direction of the gap varies across the
+            smaller models.
+          </li>
+          <li>
+            <strong>No systematic real-world advantage for multi-step inference.</strong>
+            Pooled gaps on the Franka suite are small and run in both directions, and
+            one-step motion is no less smooth for any model above 1B parameters.
+          </li>
+          <li>
+            <strong>Task success and behavioral diversity can differ.</strong>
+            On D3IL Avoiding, one-step inference preserves success while narrowing the
+            range of successful strategies.
+          </li>
+          <li>
+            <strong>Practical payoff.</strong>
+            A single Euler step gives 1.6× to 4.8× lower action-generation latency for
+            the evaluated VLAs.
+          </li>
+        </ul>
 
       <section id="citation" class="section container text-container" aria-labelledby="citation-title">
         <h2 id="citation-title">Citation</h2>
