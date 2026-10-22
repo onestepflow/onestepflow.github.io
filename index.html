@@ -665,6 +665,20 @@
                   alt="Paper Figure 4b: π₀.₅ end-effector paths around obstacles. With one step, paths concentrate on a few routes; with ten steps they spread across many routes."
                 >
               </a>
+              <!-- Interactive replacement for the image above, shown once the path data loads. -->
+              <div id="trajectory-plot" class="trajectory-plot" hidden>
+                <div class="trajectory-panels">
+                  <div class="trajectory-panel">
+                    <p class="trajectory-panel-title">1 step</p>
+                    <canvas role="img"></canvas>
+                  </div>
+                  <div class="trajectory-panel">
+                    <p class="trajectory-panel-title">10 steps</p>
+                    <canvas role="img"></canvas>
+                  </div>
+                </div>
+                <p class="trajectory-readout" aria-live="polite"></p>
+              </div>
             </div>
           </div>
           <figcaption>

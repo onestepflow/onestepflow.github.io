@@ -347,6 +347,45 @@ figcaption > .term-tip {
   width: 140px;
 }
 
+.trajectory-plot {
+  width: 100%;
+}
+
+.trajectory-plot[hidden],
+.trajectory-view a[hidden] {
+  display: none;
+}
+
+.trajectory-panels {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.trajectory-panel-title {
+  margin: 0 0 4px;
+  font-size: 16px;
+  text-align: center;
+}
+
+.trajectory-panel canvas {
+  display: block;
+  width: 100%;
+  aspect-ratio: 66 / 76;
+  border: 1px solid #e6e5e1;
+  background: #ffffff;
+  cursor: crosshair;
+  touch-action: pan-y;
+}
+
+.trajectory-readout {
+  min-height: 1.6em;
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+  text-align: center;
+}
+
 .task-videos {
   display: grid;
   grid-template-columns: repeat(2, 1fr);

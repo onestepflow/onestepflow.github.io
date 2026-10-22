@@ -408,16 +408,258 @@ const trajectoryAlts = {
 const trajectorySelect = document.querySelector('#trajectory-model');
 const trajectoryLink = document.querySelector('#trajectory-link');
 const trajectoryImage = document.querySelector('#trajectory-image');
+const trajectoryPlot = document.querySelector('#trajectory-plot');
+
+/*
+ * Interactive Figure 4b: the same paths drawn on canvas from
+ * assets/d3il-paths.json (d3il/export_web_paths.py). Hovering a path highlights
+ * that rollout in both panels, since the two step arms share initial states and
+ * policy noise rollout by rollout. The static images stay as the fallback.
+ */
+const trajectoryColors = {
+  arms: ['#d1495b', '#1f6f8b'],
+  fail: '#b9b8b2',
+  obstacle: 'rgba(82, 81, 78, 0.9)',
+  goal: '#8a8983',
+  start: '#0b0b0b',
+};
+const trajectoryDataKeys = { xr0: 'mibot' };
+let trajectoryData = null;
+let trajectoryHover = null;
+
+function trajectoryArms() {
+  const key = trajectoryDataKeys[trajectorySelect.value] ?? trajectorySelect.value;
+  return trajectoryData.models[key].arms;
+}
+
+function stepLabel(steps) {
+  return `${steps} step${steps === 1 ? '' : 's'}`;
+}
+
+function setTrajectoryReadout() {
+  const readout = trajectoryPlot.querySelector('.trajectory-readout');
+  if (trajectoryHover === null) {
+    readout.textContent = 'Hover or tap a path to highlight that rollout in both panels.';
+    return;
+  }
+  const outcomes = trajectoryArms().map(
+    (arm) => `${stepLabel(arm.steps)}: ${arm.success[trajectoryHover] ? 'success' : 'failed'}`,
+  );
+  readout.textContent = `Rollout ${trajectoryHover + 1} of 200 · ${outcomes.join(' · ')}`;
+}
+
+// Screen-space polylines for one canvas, cached until the canvas is resized.
+function projectPaths(canvas, arm) {
+  const { scale, xlim, ylim } = trajectoryData;
+  const width = canvas.clientWidth;
+  const height = canvas.clientHeight;
+  const sx = width / (xlim[1] - xlim[0]);
+  const sy = height / (ylim[1] - ylim[0]);
+  return arm.paths.map((flat) => {
+    const points = new Float32Array(flat.length);
+    for (let i = 0; i < flat.length; i += 2) {
+      points[i] = (flat[i] / scale - xlim[0]) * sx;
+      points[i + 1] = (ylim[1] - flat[i + 1] / scale) * sy;
+    }
+    return points;
+  });
+}
+
+function strokePath(ctx, points) {
+  ctx.beginPath();
+  ctx.moveTo(points[0], points[1]);
+  for (let i = 2; i < points.length; i += 2) ctx.lineTo(points[i], points[i + 1]);
+  ctx.stroke();
+}
+
+function drawTrajectoryPanel(canvas, arm, color) {
+  const ratio = window.devicePixelRatio || 1;
+  const width = canvas.clientWidth;
+  const height = canvas.clientHeight;
+  if (canvas.width !== Math.round(width * ratio) || !canvas.projected) {
+    canvas.width = Math.round(width * ratio);
+    canvas.height = Math.round(height * ratio);
+    canvas.projected = projectPaths(canvas, arm);
+  }
+  const ctx = canvas.getContext('2d');
+  const { xlim, ylim } = trajectoryData;
+  const sx = width / (xlim[1] - xlim[0]);
+  const sy = height / (ylim[1] - ylim[0]);
+  const toX = (x) => (x - xlim[0]) * sx;
+  const toY = (y) => (ylim[1] - y) * sy;
+  const dim = trajectoryHover !== null;
+
+  ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+  ctx.clearRect(0, 0, width, height);
+  ctx.lineCap = 'round';
+  ctx.lineJoin = 'round';
+
+  ctx.strokeStyle = trajectoryColors.goal;
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(0, toY(trajectoryData.goal_y));
+  ctx.lineTo(width, toY(trajectoryData.goal_y));
+  ctx.stroke();
+
+  // Failures first and faint, so the successful paths read on top of them.
+  for (const ok of [0, 1]) {
+    ctx.strokeStyle = ok ? color : trajectoryColors.fail;
+    ctx.globalAlpha = dim ? 0.07 : ok ? 0.5 : 0.35;
+    ctx.lineWidth = ok ? 0.9 : 0.75;
+    canvas.projected.forEach((points, i) => {
+      if (arm.success[i] === ok && points.length >= 4) strokePath(ctx, points);
+    });
+  }
+
+  if (dim) {
+    const points = canvas.projected[trajectoryHover];
+    const ok = arm.success[trajectoryHover];
+    ctx.globalAlpha = 1;
+    ctx.lineWidth = 2.4;
+    ctx.strokeStyle = ok ? color : '#7a7974';
+    if (points.length >= 4) strokePath(ctx, points);
+  }
+
+  ctx.globalAlpha = 1;
+  ctx.fillStyle = trajectoryColors.obstacle;
+  for (const [x, y, r] of trajectoryData.obstacles) {
+    ctx.beginPath();
+    ctx.arc(toX(x), toY(y), r * sx, 0, 2 * Math.PI);
+    ctx.fill();
+  }
+  ctx.fillStyle = trajectoryColors.start;
+  ctx.beginPath();
+  ctx.arc(toX(trajectoryData.start[0]), toY(trajectoryData.start[1]), 3, 0, 2 * Math.PI);
+  ctx.fill();
+}
+
+function drawTrajectories() {
+  const arms = trajectoryArms();
+  trajectoryPlot.querySelectorAll('.trajectory-panel').forEach((panel, i) => {
+    panel.querySelector('.trajectory-panel-title').textContent = stepLabel(arms[i].steps);
+    drawTrajectoryPanel(panel.querySelector('canvas'), arms[i], trajectoryColors.arms[i]);
+  });
+  setTrajectoryReadout();
+}
+
+function resetTrajectoryCanvases() {
+  trajectoryPlot.querySelectorAll('canvas').forEach((canvas) => {
+    canvas.projected = null;
+  });
+}
+
+// Index of the path closest to (x, y) within `reach` CSS pixels, or null.
+function nearestPath(projected, x, y, reach) {
+  let best = null;
+  let bestDistance = reach * reach;
+  projected.forEach((points, index) => {
+    for (let i = 0; i + 3 < points.length; i += 2) {
+      const ax = points[i];
+      const ay = points[i + 1];
+      const dx = points[i + 2] - ax;
+      const dy = points[i + 3] - ay;
+      const length = dx * dx + dy * dy;
+      const t = length ? Math.max(0, Math.min(1, ((x - ax) * dx + (y - ay) * dy) / length)) : 0;
+      const ex = ax + t * dx - x;
+      const ey = ay + t * dy - y;
+      const distance = ex * ex + ey * ey;
+      if (distance < bestDistance) {
+        bestDistance = distance;
+        best = index;
+      }
+    }
+  });
+  return best;
+}
+
+function setTrajectoryHover(index) {
+  if (index === trajectoryHover) return;
+  trajectoryHover = index;
+  drawTrajectories();
+}
+
+function initTrajectoryPlot(data) {
+  trajectoryData = data;
+  const canvases = trajectoryPlot.querySelectorAll('canvas');
+  let frame = 0;
+
+  canvases.forEach((canvas) => {
+    canvas.addEventListener('pointermove', (event) => {
+      const rect = canvas.getBoundingClientRect();
+      const x = event.clientX - rect.left;
+      const y = event.clientY - rect.top;
+      const reach = event.pointerType === 'mouse' ? 8 : 16;
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        setTrajectoryHover(nearestPath(canvas.projected, x, y, reach));
+      });
+    });
+    canvas.addEventListener('pointerdown', (event) => {
+      const rect = canvas.getBoundingClientRect();
+      const reach = event.pointerType === 'mouse' ? 8 : 16;
+      setTrajectoryHover(
+        nearestPath(canvas.projected, event.clientX - rect.left, event.clientY - rect.top, reach),
+      );
+    });
+    canvas.addEventListener('pointerleave', (event) => {
+      if (event.pointerType !== 'mouse') return;
+      cancelAnimationFrame(frame);
+      setTrajectoryHover(null);
+    });
+  });
+
+  new ResizeObserver(() => {
+    resetTrajectoryCanvases();
+    drawTrajectories();
+  }).observe(trajectoryPlot);
+
+  trajectoryLink.hidden = true;
+  trajectoryPlot.hidden = false;
+  updateTrajectoryLabels();
+  drawTrajectories();
+}
+
+function updateTrajectoryLabels() {
+  const label = `Figure 4b: ${trajectoryAlts[trajectorySelect.value]}`;
+  trajectoryImage.alt = `Paper ${label}`;
+  trajectoryPlot.querySelectorAll('canvas').forEach((canvas) => {
+    canvas.setAttribute('aria-label', label);
+  });
+}
 
 if (trajectorySelect && trajectoryLink && trajectoryImage) {
   trajectorySelect.closest('label').hidden = false;
   trajectorySelect.addEventListener('change', () => {
-    const model = trajectorySelect.value;
-    const src = `assets/d3il-trajectories-${model}.webp`;
+    const src = `assets/d3il-trajectories-${trajectorySelect.value}.webp`;
     trajectoryLink.href = src;
     trajectoryImage.src = src;
-    trajectoryImage.alt = `Paper Figure 4b: ${trajectoryAlts[model]}`;
+    updateTrajectoryLabels();
+    if (trajectoryData) {
+      trajectoryHover = null;
+      resetTrajectoryCanvases();
+      drawTrajectories();
+    }
   });
+
+  // Fetch the path data only as the figure nears the viewport.
+  const loadTrajectoryData = () => {
+    fetch('assets/d3il-paths.json')
+      .then((response) => (response.ok ? response.json() : Promise.reject()))
+      .then(initTrajectoryPlot)
+      .catch(() => {});
+  };
+  if (trajectoryPlot && 'IntersectionObserver' in window && 'ResizeObserver' in window) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          observer.disconnect();
+          loadTrajectoryData();
+        }
+      },
+      { rootMargin: '600px' },
+    );
+    observer.observe(trajectoryImage.closest('.trajectory-view'));
+  }
 }
 
 const copyButton = document.querySelector('#copy-citation');
