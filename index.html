@@ -422,13 +422,20 @@
         <div class="prose text-container">
           <p>
             Multi-step inference confers no systematic advantage. Only 3 of 24
-            task–model comparisons show a significant McNemar difference, and they run
-            in both directions: the reference is better on <em>Close Oven</em> for π₀.₅
+            task–model comparisons show a significant
+            <span class="term-tip">
+              <button type="button" class="term-tip-trigger" aria-describedby="mcnemar-tip">McNemar</button>
+              <span id="mcnemar-tip" class="term-tip-popup" role="tooltip">
+                <strong>McNemar's</strong> test is a statistical test on paired data: in this case we compare one-step and multi-step inference
+                on the same matched initial conditions and noise streams. A small p-value means that one condition
+                is significantly better than the other.
+              </span>
+            </span>
+            difference, and they run            in both directions: the reference is better on <em>Close Oven</em> for π₀.₅
             and FLOWER, while one step is better for FLOWER on <em>Open Drawer</em>.
             Pooled per-model gaps are small and bidirectional, with 4 of 6 models within
-            ±2 pp. LAP is the only model whose pooled CI excludes zero (McNemar
-            p = 0.0545), so a genuine multi-step advantage cannot be ruled out there.
-            The physical evaluation budget does not establish equivalence within ±3 pp.
+            ±2 pp. For LAP, a genuine multi-step advantage cannot be ruled out there.
+<!--             The physical evaluation budget does not establish equivalence within ±3 pp. -->
             Select <em>Real world</em> in the benchmark explorer above for pooled
             success rates per model.
           </p>
