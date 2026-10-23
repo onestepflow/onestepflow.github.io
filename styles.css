@@ -129,7 +129,9 @@ h2 {
 }
 
 .team-button {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   padding: 9px 22px;
   border: 1px solid var(--border);
   border-radius: 999px;
@@ -137,6 +139,12 @@ h2 {
   background: var(--surface);
   font-size: 16px;
   font-weight: 600;
+}
+
+.team-button img {
+  width: 77px;
+  height: auto;
+  flex-shrink: 0;
 }
 
 .team-button:hover {
