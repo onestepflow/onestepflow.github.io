@@ -74,6 +74,7 @@
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
     <link rel="stylesheet" href="styles.css">
     <script src="script.js" defer></script>
+    <script src="overview.js" defer></script>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -261,6 +262,7 @@
         </p>
         <figure class="paper-figure">
           <a
+            id="overview-fallback"
             href="assets/overview.webp"
             target="_blank"
             rel="noopener"
@@ -274,6 +276,11 @@
               fetchpriority="high"
             >
           </a>
+          <div id="overview-interactive" hidden>
+            <p class="overview-hint">Hover over a point for more details.</p>
+            <div class="overview-scroll"><svg id="overview-chart" viewBox="0 0 1200 390" role="group" aria-label="One-step versus reference-step success rates across four benchmarks"></svg></div>
+            <div id="overview-tooltip" role="tooltip" hidden></div>
+          </div>
           <figcaption>
             <span>Fig. 1</span>
             One-step vs. reference-step success rates across every (model, benchmark)

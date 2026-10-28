@@ -1,0 +1,1418 @@
+[
+  {
+    "panel": 0,
+    "model": "DiT",
+    "benchmark": "LIBERO · Spatial",
+    "steps": 10,
+    "x": 89.6,
+    "y": 94.4
+  },
+  {
+    "panel": 0,
+    "model": "DiT",
+    "benchmark": "LIBERO · Object",
+    "steps": 10,
+    "x": 91.4,
+    "y": 92.2
+  },
+  {
+    "panel": 0,
+    "model": "DiT",
+    "benchmark": "LIBERO · Goal",
+    "steps": 10,
+    "x": 88.8,
+    "y": 89.0
+  },
+  {
+    "panel": 0,
+    "model": "DiT",
+    "benchmark": "LIBERO · LIBERO-10",
+    "steps": 10,
+    "x": 68.4,
+    "y": 53.8
+  },
+  {
+    "panel": 0,
+    "model": "SmolVLA",
+    "benchmark": "LIBERO · Spatial",
+    "steps": 10,
+    "x": 59.8,
+    "y": 82.6
+  },
+  {
+    "panel": 0,
+    "model": "SmolVLA",
+    "benchmark": "LIBERO · Object",
+    "steps": 10,
+    "x": 88.0,
+    "y": 93.4
+  },
+  {
+    "panel": 0,
+    "model": "SmolVLA",
+    "benchmark": "LIBERO · Goal",
+    "steps": 10,
+    "x": 68.8,
+    "y": 70.0
+  },
+  {
+    "panel": 0,
+    "model": "SmolVLA",
+    "benchmark": "LIBERO · LIBERO-10",
+    "steps": 10,
+    "x": 34.6,
+    "y": 44.2
+  },
+  {
+    "panel": 0,
+    "model": "X-VLA",
+    "benchmark": "LIBERO · Spatial",
+    "steps": 10,
+    "x": 97.4,
+    "y": 97.0
+  },
+  {
+    "panel": 0,
+    "model": "X-VLA",
+    "benchmark": "LIBERO · Object",
+    "steps": 10,
+    "x": 98.2,
+    "y": 98.0
+  },
+  {
+    "panel": 0,
+    "model": "X-VLA",
+    "benchmark": "LIBERO · Goal",
+    "steps": 10,
+    "x": 97.2,
+    "y": 97.0
+  },
+  {
+    "panel": 0,
+    "model": "X-VLA",
+    "benchmark": "LIBERO · LIBERO-10",
+    "steps": 10,
+    "x": 96.2,
+    "y": 96.0
+  },
+  {
+    "panel": 0,
+    "model": "FLOWER",
+    "benchmark": "LIBERO · Spatial",
+    "steps": 4,
+    "x": 96.8,
+    "y": 94.6
+  },
+  {
+    "panel": 0,
+    "model": "FLOWER",
+    "benchmark": "LIBERO · Object",
+    "steps": 4,
+    "x": 99.6,
+    "y": 99.6
+  },
+  {
+    "panel": 0,
+    "model": "FLOWER",
+    "benchmark": "LIBERO · Goal",
+    "steps": 4,
+    "x": 95.6,
+    "y": 95.4
+  },
+  {
+    "panel": 0,
+    "model": "FLOWER",
+    "benchmark": "LIBERO · LIBERO-10",
+    "steps": 4,
+    "x": 89.6,
+    "y": 83.6
+  },
+  {
+    "panel": 0,
+    "model": "π₀.₅",
+    "benchmark": "LIBERO · Spatial",
+    "steps": 10,
+    "x": 98.0,
+    "y": 98.0
+  },
+  {
+    "panel": 0,
+    "model": "π₀.₅",
+    "benchmark": "LIBERO · Object",
+    "steps": 10,
+    "x": 99.4,
+    "y": 99.8
+  },
+  {
+    "panel": 0,
+    "model": "π₀.₅",
+    "benchmark": "LIBERO · Goal",
+    "steps": 10,
+    "x": 98.2,
+    "y": 98.8
+  },
+  {
+    "panel": 0,
+    "model": "π₀.₅",
+    "benchmark": "LIBERO · LIBERO-10",
+    "steps": 10,
+    "x": 94.4,
+    "y": 94.4
+  },
+  {
+    "panel": 0,
+    "model": "LAP",
+    "benchmark": "LIBERO · Spatial",
+    "steps": 10,
+    "x": 98.0,
+    "y": 98.8
+  },
+  {
+    "panel": 0,
+    "model": "LAP",
+    "benchmark": "LIBERO · Object",
+    "steps": 10,
+    "x": 98.8,
+    "y": 99.0
+  },
+  {
+    "panel": 0,
+    "model": "LAP",
+    "benchmark": "LIBERO · Goal",
+    "steps": 10,
+    "x": 96.4,
+    "y": 98.6
+  },
+  {
+    "panel": 0,
+    "model": "LAP",
+    "benchmark": "LIBERO · LIBERO-10",
+    "steps": 10,
+    "x": 90.2,
+    "y": 92.0
+  },
+  {
+    "panel": 0,
+    "model": "XR-0",
+    "benchmark": "LIBERO · Spatial",
+    "steps": 5,
+    "x": 93.4,
+    "y": 92.4
+  },
+  {
+    "panel": 0,
+    "model": "XR-0",
+    "benchmark": "LIBERO · Object",
+    "steps": 5,
+    "x": 99.4,
+    "y": 100.0
+  },
+  {
+    "panel": 0,
+    "model": "XR-0",
+    "benchmark": "LIBERO · Goal",
+    "steps": 5,
+    "x": 99.0,
+    "y": 98.6
+  },
+  {
+    "panel": 0,
+    "model": "XR-0",
+    "benchmark": "LIBERO · LIBERO-10",
+    "steps": 5,
+    "x": 96.8,
+    "y": 97.4
+  },
+  {
+    "panel": 0,
+    "model": "DiT",
+    "benchmark": "LIBERO+ · Spatial",
+    "steps": 10,
+    "x": 38.21815154038301,
+    "y": 39.09242298084929
+  },
+  {
+    "panel": 0,
+    "model": "DiT",
+    "benchmark": "LIBERO+ · Object",
+    "steps": 10,
+    "x": 31.652104845115172,
+    "y": 28.673550436854647
+  },
+  {
+    "panel": 0,
+    "model": "DiT",
+    "benchmark": "LIBERO+ · Goal",
+    "steps": 10,
+    "x": 23.1184870706291,
+    "y": 18.83442686221536
+  },
+  {
+    "panel": 0,
+    "model": "DiT",
+    "benchmark": "LIBERO+ · LIBERO-10",
+    "steps": 10,
+    "x": 21.953156014291384,
+    "y": 14.529575228265184
+  },
+  {
+    "panel": 0,
+    "model": "SmolVLA",
+    "benchmark": "LIBERO+ · Spatial",
+    "steps": 10,
+    "x": 7.7851790174854285,
+    "y": 8.118234804329726
+  },
+  {
+    "panel": 0,
+    "model": "SmolVLA",
+    "benchmark": "LIBERO+ · Object",
+    "steps": 10,
+    "x": 5.599682287529785,
+    "y": 6.7911040508339955
+  },
+  {
+    "panel": 0,
+    "model": "SmolVLA",
+    "benchmark": "LIBERO+ · Goal",
+    "steps": 10,
+    "x": 1.2350443844075647,
+    "y": 0.5017367811655732
+  },
+  {
+    "panel": 0,
+    "model": "SmolVLA",
+    "benchmark": "LIBERO+ · LIBERO-10",
+    "steps": 10,
+    "x": 1.2306470821754665,
+    "y": 0.6748709805478365
+  },
+  {
+    "panel": 0,
+    "model": "X-VLA",
+    "benchmark": "LIBERO+ · Spatial",
+    "steps": 10,
+    "x": 73.93838467943381,
+    "y": 74.14654454621149
+  },
+  {
+    "panel": 0,
+    "model": "X-VLA",
+    "benchmark": "LIBERO+ · Object",
+    "steps": 10,
+    "x": 69.14217633042097,
+    "y": 69.14217633042097
+  },
+  {
+    "panel": 0,
+    "model": "X-VLA",
+    "benchmark": "LIBERO+ · Goal",
+    "steps": 10,
+    "x": 67.92744114241606,
+    "y": 68.15901196449248
+  },
+  {
+    "panel": 0,
+    "model": "X-VLA",
+    "benchmark": "LIBERO+ · LIBERO-10",
+    "steps": 10,
+    "x": 67.36800317586344,
+    "y": 66.8519253672092
+  },
+  {
+    "panel": 0,
+    "model": "FLOWER",
+    "benchmark": "LIBERO+ · Spatial",
+    "steps": 4,
+    "x": 81.51540383014155,
+    "y": 76.14487926727728
+  },
+  {
+    "panel": 0,
+    "model": "FLOWER",
+    "benchmark": "LIBERO+ · Object",
+    "steps": 4,
+    "x": 80.46068308181096,
+    "y": 77.16441620333597
+  },
+  {
+    "panel": 0,
+    "model": "FLOWER",
+    "benchmark": "LIBERO+ · Goal",
+    "steps": 4,
+    "x": 71.24662292551139,
+    "y": 70.16595908915477
+  },
+  {
+    "panel": 0,
+    "model": "FLOWER",
+    "benchmark": "LIBERO+ · LIBERO-10",
+    "steps": 4,
+    "x": 72.01270345375148,
+    "y": 59.2695514092894
+  },
+  {
+    "panel": 0,
+    "model": "π₀.₅",
+    "benchmark": "LIBERO+ · Spatial",
+    "steps": 10,
+    "x": 89.54166666666667,
+    "y": 90.66666666666667
+  },
+  {
+    "panel": 0,
+    "model": "π₀.₅",
+    "benchmark": "LIBERO+ · Object",
+    "steps": 10,
+    "x": 89.43381180223285,
+    "y": 88.47687400318979
+  },
+  {
+    "panel": 0,
+    "model": "π₀.₅",
+    "benchmark": "LIBERO+ · Goal",
+    "steps": 10,
+    "x": 80.43647700701482,
+    "y": 79.96882307092751
+  },
+  {
+    "panel": 0,
+    "model": "π₀.₅",
+    "benchmark": "LIBERO+ · LIBERO-10",
+    "steps": 10,
+    "x": 77.5779376498801,
+    "y": 76.13908872901679
+  },
+  {
+    "panel": 0,
+    "model": "LAP",
+    "benchmark": "LIBERO+ · Spatial",
+    "steps": 10,
+    "x": 78.60116569525395,
+    "y": 79.14238134887594
+  },
+  {
+    "panel": 0,
+    "model": "LAP",
+    "benchmark": "LIBERO+ · Object",
+    "steps": 10,
+    "x": 80.26211278792692,
+    "y": 78.4352660841938
+  },
+  {
+    "panel": 0,
+    "model": "LAP",
+    "benchmark": "LIBERO+ · Goal",
+    "steps": 10,
+    "x": 74.14125820146661,
+    "y": 73.36935546121188
+  },
+  {
+    "panel": 0,
+    "model": "LAP",
+    "benchmark": "LIBERO+ · LIBERO-10",
+    "steps": 10,
+    "x": 66.41524414450178,
+    "y": 65.66097657800715
+  },
+  {
+    "panel": 0,
+    "model": "XR-0",
+    "benchmark": "LIBERO+ · Spatial",
+    "steps": 5,
+    "x": 83.29166666666667,
+    "y": 83.875
+  },
+  {
+    "panel": 0,
+    "model": "XR-0",
+    "benchmark": "LIBERO+ · Object",
+    "steps": 5,
+    "x": 76.43540669856459,
+    "y": 77.35247208931419
+  },
+  {
+    "panel": 0,
+    "model": "XR-0",
+    "benchmark": "LIBERO+ · Goal",
+    "steps": 5,
+    "x": 68.1215900233827,
+    "y": 68.70615744349182
+  },
+  {
+    "panel": 0,
+    "model": "XR-0",
+    "benchmark": "LIBERO+ · LIBERO-10",
+    "steps": 5,
+    "x": 70.2238209432454,
+    "y": 69.58433253397283
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Clean · adjust bottle",
+    "steps": 10,
+    "x": 100.0,
+    "y": 100.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Clean · beat block hammer",
+    "steps": 10,
+    "x": 99.0,
+    "y": 97.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Clean · blocks ranking rgb",
+    "steps": 10,
+    "x": 0.0,
+    "y": 0.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Clean · blocks ranking size",
+    "steps": 10,
+    "x": 0.0,
+    "y": 0.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Clean · click alarmclock",
+    "steps": 10,
+    "x": 20.0,
+    "y": 19.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Clean · click bell",
+    "steps": 10,
+    "x": 99.0,
+    "y": 99.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Clean · dump bin bigbin",
+    "steps": 10,
+    "x": 88.0,
+    "y": 87.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Clean · grab roller",
+    "steps": 10,
+    "x": 100.0,
+    "y": 100.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Clean · handover block",
+    "steps": 10,
+    "x": 87.0,
+    "y": 91.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Clean · handover mic",
+    "steps": 10,
+    "x": 98.0,
+    "y": 100.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Clean · hanging mug",
+    "steps": 10,
+    "x": 34.0,
+    "y": 31.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Clean · lift pot",
+    "steps": 10,
+    "x": 100.0,
+    "y": 99.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Clean · move can pot",
+    "steps": 10,
+    "x": 74.0,
+    "y": 76.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Clean · move pillbottle pad",
+    "steps": 10,
+    "x": 79.0,
+    "y": 78.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Clean · move playingcard away",
+    "steps": 10,
+    "x": 94.0,
+    "y": 94.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Clean · move stapler pad",
+    "steps": 10,
+    "x": 51.0,
+    "y": 50.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Clean · open laptop",
+    "steps": 10,
+    "x": 45.0,
+    "y": 45.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Clean · open microwave",
+    "steps": 10,
+    "x": 0.0,
+    "y": 1.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Clean · pick diverse bottles",
+    "steps": 10,
+    "x": 58.0,
+    "y": 53.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Clean · pick dual bottles",
+    "steps": 10,
+    "x": 85.0,
+    "y": 87.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Clean · place a2b left",
+    "steps": 10,
+    "x": 34.0,
+    "y": 32.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Clean · place a2b right",
+    "steps": 10,
+    "x": 31.0,
+    "y": 30.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Clean · place bread basket",
+    "steps": 10,
+    "x": 83.0,
+    "y": 83.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Clean · place bread skillet",
+    "steps": 10,
+    "x": 88.0,
+    "y": 85.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Clean · place burger fries",
+    "steps": 10,
+    "x": 99.0,
+    "y": 98.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Clean · place can basket",
+    "steps": 10,
+    "x": 79.0,
+    "y": 74.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Clean · place cans plasticbox",
+    "steps": 10,
+    "x": 96.0,
+    "y": 96.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Clean · place container plate",
+    "steps": 10,
+    "x": 98.0,
+    "y": 98.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Clean · place dual shoes",
+    "steps": 10,
+    "x": 68.0,
+    "y": 68.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Clean · place empty cup",
+    "steps": 10,
+    "x": 100.0,
+    "y": 100.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Clean · place fan",
+    "steps": 10,
+    "x": 69.0,
+    "y": 78.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Clean · place mouse pad",
+    "steps": 10,
+    "x": 40.0,
+    "y": 32.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Clean · place object basket",
+    "steps": 10,
+    "x": 49.0,
+    "y": 51.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Clean · place object scale",
+    "steps": 10,
+    "x": 32.0,
+    "y": 30.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Clean · place object stand",
+    "steps": 10,
+    "x": 88.0,
+    "y": 89.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Clean · place phone stand",
+    "steps": 10,
+    "x": 92.0,
+    "y": 94.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Clean · place shoe",
+    "steps": 10,
+    "x": 87.0,
+    "y": 86.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Clean · press stapler",
+    "steps": 10,
+    "x": 71.0,
+    "y": 70.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Clean · put bottles dustbin",
+    "steps": 10,
+    "x": 0.0,
+    "y": 0.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Clean · put object cabinet",
+    "steps": 10,
+    "x": 54.0,
+    "y": 53.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Clean · rotate qrcode",
+    "steps": 10,
+    "x": 87.0,
+    "y": 84.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Clean · scan object",
+    "steps": 10,
+    "x": 78.0,
+    "y": 81.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Clean · shake bottle",
+    "steps": 10,
+    "x": 100.0,
+    "y": 98.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Clean · shake bottle horizontally",
+    "steps": 10,
+    "x": 100.0,
+    "y": 99.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Clean · stack blocks three",
+    "steps": 10,
+    "x": 0.0,
+    "y": 0.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Clean · stack blocks two",
+    "steps": 10,
+    "x": 88.0,
+    "y": 86.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Clean · stack bowls three",
+    "steps": 10,
+    "x": 0.0,
+    "y": 0.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Clean · stack bowls two",
+    "steps": 10,
+    "x": 75.0,
+    "y": 76.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Clean · stamp seal",
+    "steps": 10,
+    "x": 48.0,
+    "y": 47.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Clean · turn switch",
+    "steps": 10,
+    "x": 31.0,
+    "y": 30.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Randomized · adjust bottle",
+    "steps": 10,
+    "x": 59.0,
+    "y": 51.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Randomized · beat block hammer",
+    "steps": 10,
+    "x": 18.0,
+    "y": 14.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Randomized · blocks ranking rgb",
+    "steps": 10,
+    "x": 0.0,
+    "y": 0.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Randomized · blocks ranking size",
+    "steps": 10,
+    "x": 0.0,
+    "y": 0.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Randomized · click alarmclock",
+    "steps": 10,
+    "x": 54.0,
+    "y": 59.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Randomized · click bell",
+    "steps": 10,
+    "x": 54.0,
+    "y": 53.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Randomized · dump bin bigbin",
+    "steps": 10,
+    "x": 50.0,
+    "y": 42.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Randomized · grab roller",
+    "steps": 10,
+    "x": 41.0,
+    "y": 39.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Randomized · handover block",
+    "steps": 10,
+    "x": 1.0,
+    "y": 1.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Randomized · handover mic",
+    "steps": 10,
+    "x": 1.0,
+    "y": 1.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Randomized · hanging mug",
+    "steps": 10,
+    "x": 5.0,
+    "y": 4.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Randomized · lift pot",
+    "steps": 10,
+    "x": 5.0,
+    "y": 3.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Randomized · move can pot",
+    "steps": 10,
+    "x": 6.0,
+    "y": 3.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Randomized · move pillbottle pad",
+    "steps": 10,
+    "x": 6.0,
+    "y": 4.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Randomized · move playingcard away",
+    "steps": 10,
+    "x": 42.0,
+    "y": 39.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Randomized · move stapler pad",
+    "steps": 10,
+    "x": 4.0,
+    "y": 6.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Randomized · open laptop",
+    "steps": 10,
+    "x": 14.0,
+    "y": 17.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Randomized · open microwave",
+    "steps": 10,
+    "x": 1.0,
+    "y": 1.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Randomized · pick diverse bottles",
+    "steps": 10,
+    "x": 52.0,
+    "y": 47.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Randomized · pick dual bottles",
+    "steps": 10,
+    "x": 64.0,
+    "y": 68.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Randomized · place a2b left",
+    "steps": 10,
+    "x": 11.0,
+    "y": 16.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Randomized · place a2b right",
+    "steps": 10,
+    "x": 14.0,
+    "y": 16.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Randomized · place bread basket",
+    "steps": 10,
+    "x": 42.0,
+    "y": 34.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Randomized · place bread skillet",
+    "steps": 10,
+    "x": 22.0,
+    "y": 15.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Randomized · place burger fries",
+    "steps": 10,
+    "x": 38.0,
+    "y": 38.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Randomized · place can basket",
+    "steps": 10,
+    "x": 24.0,
+    "y": 22.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Randomized · place cans plasticbox",
+    "steps": 10,
+    "x": 75.0,
+    "y": 71.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Randomized · place container plate",
+    "steps": 10,
+    "x": 50.0,
+    "y": 47.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Randomized · place dual shoes",
+    "steps": 10,
+    "x": 40.0,
+    "y": 35.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Randomized · place empty cup",
+    "steps": 10,
+    "x": 30.0,
+    "y": 24.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Randomized · place fan",
+    "steps": 10,
+    "x": 14.0,
+    "y": 15.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Randomized · place mouse pad",
+    "steps": 10,
+    "x": 1.0,
+    "y": 0.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Randomized · place object basket",
+    "steps": 10,
+    "x": 8.0,
+    "y": 8.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Randomized · place object scale",
+    "steps": 10,
+    "x": 4.0,
+    "y": 2.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Randomized · place object stand",
+    "steps": 10,
+    "x": 26.0,
+    "y": 20.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Randomized · place phone stand",
+    "steps": 10,
+    "x": 2.0,
+    "y": 2.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Randomized · place shoe",
+    "steps": 10,
+    "x": 30.0,
+    "y": 36.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Randomized · press stapler",
+    "steps": 10,
+    "x": 22.0,
+    "y": 21.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Randomized · put bottles dustbin",
+    "steps": 10,
+    "x": 0.0,
+    "y": 0.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Randomized · put object cabinet",
+    "steps": 10,
+    "x": 24.0,
+    "y": 23.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Randomized · rotate qrcode",
+    "steps": 10,
+    "x": 18.0,
+    "y": 16.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Randomized · scan object",
+    "steps": 10,
+    "x": 25.0,
+    "y": 31.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Randomized · shake bottle",
+    "steps": 10,
+    "x": 76.0,
+    "y": 78.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Randomized · shake bottle horizontally",
+    "steps": 10,
+    "x": 80.0,
+    "y": 80.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Randomized · stack blocks three",
+    "steps": 10,
+    "x": 0.0,
+    "y": 0.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Randomized · stack blocks two",
+    "steps": 10,
+    "x": 40.0,
+    "y": 35.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Randomized · stack bowls three",
+    "steps": 10,
+    "x": 0.0,
+    "y": 0.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Randomized · stack bowls two",
+    "steps": 10,
+    "x": 7.0,
+    "y": 10.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Randomized · stamp seal",
+    "steps": 10,
+    "x": 4.0,
+    "y": 3.0
+  },
+  {
+    "panel": 1,
+    "model": "X-VLA",
+    "benchmark": "RoboTwin · Randomized · turn switch",
+    "steps": 10,
+    "x": 11.0,
+    "y": 13.0
+  },
+  {
+    "panel": 2,
+    "model": "X-VLA",
+    "benchmark": "CALVIN ABC→D · SR1",
+    "steps": 10,
+    "x": 95.8,
+    "y": 95.1
+  },
+  {
+    "panel": 2,
+    "model": "X-VLA",
+    "benchmark": "CALVIN ABC→D · SR2",
+    "steps": 10,
+    "x": 89.8,
+    "y": 88.9
+  },
+  {
+    "panel": 2,
+    "model": "X-VLA",
+    "benchmark": "CALVIN ABC→D · SR3",
+    "steps": 10,
+    "x": 83.8,
+    "y": 83.1
+  },
+  {
+    "panel": 2,
+    "model": "X-VLA",
+    "benchmark": "CALVIN ABC→D · SR4",
+    "steps": 10,
+    "x": 77.9,
+    "y": 77.3
+  },
+  {
+    "panel": 2,
+    "model": "X-VLA",
+    "benchmark": "CALVIN ABC→D · SR5",
+    "steps": 10,
+    "x": 71.0,
+    "y": 70.0
+  },
+  {
+    "panel": 2,
+    "model": "FLOWER",
+    "benchmark": "CALVIN ABC→D · SR1",
+    "steps": 4,
+    "x": 99.8,
+    "y": 99.3
+  },
+  {
+    "panel": 2,
+    "model": "FLOWER",
+    "benchmark": "CALVIN ABC→D · SR2",
+    "steps": 4,
+    "x": 97.6,
+    "y": 94.1
+  },
+  {
+    "panel": 2,
+    "model": "FLOWER",
+    "benchmark": "CALVIN ABC→D · SR3",
+    "steps": 4,
+    "x": 92.1,
+    "y": 88.8
+  },
+  {
+    "panel": 2,
+    "model": "FLOWER",
+    "benchmark": "CALVIN ABC→D · SR4",
+    "steps": 4,
+    "x": 86.1,
+    "y": 83.6
+  },
+  {
+    "panel": 2,
+    "model": "FLOWER",
+    "benchmark": "CALVIN ABC→D · SR5",
+    "steps": 4,
+    "x": 79.5,
+    "y": 77.0
+  },
+  {
+    "panel": 2,
+    "model": "XR-0",
+    "benchmark": "CALVIN ABC→D · SR1",
+    "steps": 5,
+    "x": 99.9,
+    "y": 99.9
+  },
+  {
+    "panel": 2,
+    "model": "XR-0",
+    "benchmark": "CALVIN ABC→D · SR2",
+    "steps": 5,
+    "x": 98.1,
+    "y": 97.8
+  },
+  {
+    "panel": 2,
+    "model": "XR-0",
+    "benchmark": "CALVIN ABC→D · SR3",
+    "steps": 5,
+    "x": 95.6,
+    "y": 95.4
+  },
+  {
+    "panel": 2,
+    "model": "XR-0",
+    "benchmark": "CALVIN ABC→D · SR4",
+    "steps": 5,
+    "x": 92.2,
+    "y": 92.2
+  },
+  {
+    "panel": 2,
+    "model": "XR-0",
+    "benchmark": "CALVIN ABC→D · SR5",
+    "steps": 5,
+    "x": 87.2,
+    "y": 88.1
+  },
+  {
+    "panel": 3,
+    "model": "DiT",
+    "benchmark": "Real world · pooled suite",
+    "steps": 10,
+    "x": 28.5,
+    "y": 30.0
+  },
+  {
+    "panel": 3,
+    "model": "X-VLA",
+    "benchmark": "Real world · pooled suite",
+    "steps": 10,
+    "x": 29.25,
+    "y": 30.5
+  },
+  {
+    "panel": 3,
+    "model": "FLOWER",
+    "benchmark": "Real world · pooled suite",
+    "steps": 5,
+    "x": 59.75,
+    "y": 63.25
+  },
+  {
+    "panel": 3,
+    "model": "π₀.₅",
+    "benchmark": "Real world · pooled suite",
+    "steps": 10,
+    "x": 79.0,
+    "y": 78.5
+  },
+  {
+    "panel": 3,
+    "model": "LAP",
+    "benchmark": "Real world · pooled suite",
+    "steps": 10,
+    "x": 74.25,
+    "y": 70.5
+  },
+  {
+    "panel": 3,
+    "model": "XR-0",
+    "benchmark": "Real world · pooled suite",
+    "steps": 5,
+    "x": 71.0,
+    "y": 70.5
+  }
+]
