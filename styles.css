@@ -124,8 +124,13 @@ h2 {
 /* Title, author names, and publication links. */
 
 .site-header {
-  padding: 24px 16px 0;
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  padding: 10px 16px 0;
   text-align: center;
+  background: rgb(255 255 255 / 96%);
+  border-bottom: 1px solid var(--border);
 }
 
 .team-button {
@@ -139,6 +144,29 @@ h2 {
   background: var(--surface);
   font-size: 16px;
   font-weight: 600;
+}
+
+.section-nav {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 8px;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.section-nav a {
+  flex: 0 0 auto;
+  padding: 5px 10px 8px;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.section-nav a:hover {
+  color: var(--link);
+  text-decoration: none;
 }
 
 .team-button img {
