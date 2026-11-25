@@ -224,8 +224,20 @@ h2 {
 
 .publication-venue {
   margin-top: 17px;
+  color: #a56c00;
   font-size: 17px;
-  font-weight: 600;
+  font-weight: 700;
+}
+
+.publication-venue a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+.publication-venue-star {
+  margin-inline-end: 0.2em;
+  color: #d99a00;
 }
 
 .conference-details {
